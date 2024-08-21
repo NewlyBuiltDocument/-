@@ -1,0 +1,41 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using simple_calculator;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace simple_calculator.Tests
+{
+    [TestClass()]
+    public class CalFormTests
+    {
+        [TestMethod()]
+        [Timeout(2000)]
+        [DataRow("1+2", 3.0)]
+        [DataRow("4.5-6.17", -1.67)]
+        [DataRow("3.5*2.6", 9.1)]
+        [DataRow("2/9", 2 / 9)]
+        [DataRow("(3.5+2)*4", (3.5 + 2) * 4)]
+        [DataRow("3.5+2*4", 3.5 + 2 * 4)]
+        [DataRow("((3.5+2)*4-1)/6", ((3.5 + 2) * 4 - 1) / 6)]
+        public void CalculateTest(string input, double expected)
+        {
+            double result = CalForm.Calculate(input);
+            Assert.AreEqual(expected, result);
+        }
+        
+        [TestMethod()]
+        [Timeout(2000)]
+        [DataRow("3^2", 3, 2)]
+        [DataRow("-2^3", -2, 3)]
+        [DataRow("3.2^2.5", 3.2, 2.5)]
+        public void CalculatePowerTest(string input, double baseNumber, double exponent)
+        {
+            double result = CalForm.Calculate(input);
+            double expected = Math.Pow(baseNumber, exponent);
+            Assert.AreEqual(expected, result);
+        }
+    }
+}

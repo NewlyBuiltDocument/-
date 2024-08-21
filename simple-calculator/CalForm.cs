@@ -2,32 +2,6 @@
 
 namespace simple_calculator
 {
-    //字符串和IndexOfAny对应方法
-    public static class StringExtend
-    {
-        public static int IndexNotOfAny(this string str, char[] anyOf, int startIndex)
-        {
-            for (int a = startIndex; a < str.Length; ++a)
-            {
-                char b = str[a];
-                bool c = true;
-                foreach (char d in anyOf)
-                {
-                    if (b == d)
-                    {
-                        c = false;
-                        break;
-                    }
-                }
-                if (c)
-                {
-                    return a;
-                }
-            }
-            return -1;
-        }
-    }
-
     public partial class CalForm : Form
     {
         //显示字符串
@@ -144,9 +118,9 @@ namespace simple_calculator
             }
         }
         //核心计算，对括号处理
-        private double Calculate()
+        public static double Calculate(string expression)
         {
-            string b = display;
+            string b = expression;
             List<double> c = Zhuan(ref b);
             for (int d = b.IndexOf(')'), e, f; d != -1; d = b.IndexOf(')', e))//有括号时对括号的处理
             {
@@ -216,7 +190,8 @@ namespace simple_calculator
         /// <exception cref="NotImplementedException"></exception>
         private void BtnEqual_Click(object sender, EventArgs e)
         {
-            string ans = Calculate().ToString();
+            string ans = Calculate(display).ToString();
+            //string ans = "ans";
             display += "=";
             display += ans;
             UpdateDisplay();
@@ -260,8 +235,11 @@ namespace simple_calculator
         /// <param name="e"></param>
         private void BtnDel_Click(object sender, EventArgs e)
         {
-            display = display.Remove(display.Length - 1);
-            UpdateDisplay();
+            if (display.Length > 0)
+            {
+                display = display.Remove(display.Length - 1);
+                UpdateDisplay();
+            }
         }
 
         /// <summary>
@@ -383,5 +361,30 @@ namespace simple_calculator
             UpdateDisplay();
         }
 
+    }
+    //字符串和IndexOfAny对应方法
+    public static class StringExtend
+    {
+        public static int IndexNotOfAny(this string str, char[] anyOf, int startIndex)
+        {
+            for (int a = startIndex; a < str.Length; ++a)
+            {
+                char b = str[a];
+                bool c = true;
+                foreach (char d in anyOf)
+                {
+                    if (b == d)
+                    {
+                        c = false;
+                        break;
+                    }
+                }
+                if (c)
+                {
+                    return a;
+                }
+            }
+            return -1;
+        }
     }
 }

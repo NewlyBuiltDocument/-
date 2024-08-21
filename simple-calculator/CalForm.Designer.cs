@@ -64,8 +64,9 @@ namespace simple_calculator
             panel1.Controls.Add(DisplayText);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(2, 2, 2, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1041, 165);
+            panel1.Size = new Size(528, 90);
             panel1.TabIndex = 0;
             // 
             // DisplayText
@@ -73,9 +74,10 @@ namespace simple_calculator
             DisplayText.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             DisplayText.BackColor = SystemColors.Window;
             DisplayText.Font = new Font("Times New Roman", 42F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            DisplayText.Location = new Point(12, 12);
+            DisplayText.Location = new Point(6, 7);
+            DisplayText.Margin = new Padding(2, 2, 2, 2);
             DisplayText.Name = "DisplayText";
-            DisplayText.Size = new Size(1017, 136);
+            DisplayText.Size = new Size(518, 72);
             DisplayText.TabIndex = 0;
             DisplayText.Text = "1+2=3";
             DisplayText.TextAlign = HorizontalAlignment.Right;
@@ -106,17 +108,19 @@ namespace simple_calculator
             panel2.Controls.Add(Btn7);
             panel2.Controls.Add(BtnDivide);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(0, 165);
+            panel2.Location = new Point(0, 90);
+            panel2.Margin = new Padding(2, 2, 2, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1041, 821);
+            panel2.Size = new Size(528, 451);
             panel2.TabIndex = 1;
             // 
             // BtnHistory
             // 
             BtnHistory.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            BtnHistory.Location = new Point(838, 355);
+            BtnHistory.Location = new Point(419, 195);
+            BtnHistory.Margin = new Padding(2, 2, 2, 2);
             BtnHistory.Name = "BtnHistory";
-            BtnHistory.Size = new Size(169, 425);
+            BtnHistory.Size = new Size(90, 233);
             BtnHistory.TabIndex = 34;
             BtnHistory.Text = "History";
             BtnHistory.UseVisualStyleBackColor = true;
@@ -125,9 +129,10 @@ namespace simple_calculator
             // BtnClear
             // 
             BtnClear.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            BtnClear.Location = new Point(838, 45);
+            BtnClear.Location = new Point(419, 25);
+            BtnClear.Margin = new Padding(2, 2, 2, 2);
             BtnClear.Name = "BtnClear";
-            BtnClear.Size = new Size(169, 270);
+            BtnClear.Size = new Size(90, 148);
             BtnClear.TabIndex = 33;
             BtnClear.Text = "Clear";
             BtnClear.UseVisualStyleBackColor = true;
@@ -136,9 +141,10 @@ namespace simple_calculator
             // BtnExp
             // 
             BtnExp.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            BtnExp.Location = new Point(441, 45);
+            BtnExp.Location = new Point(220, 25);
+            BtnExp.Margin = new Padding(2, 2, 2, 2);
             BtnExp.Name = "BtnExp";
-            BtnExp.Size = new Size(160, 115);
+            BtnExp.Size = new Size(80, 63);
             BtnExp.TabIndex = 32;
             BtnExp.Text = "^";
             BtnExp.UseVisualStyleBackColor = true;
@@ -147,9 +153,10 @@ namespace simple_calculator
             // BtnRBracket
             // 
             BtnRBracket.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            BtnRBracket.Location = new Point(241, 45);
+            BtnRBracket.Location = new Point(120, 25);
+            BtnRBracket.Margin = new Padding(2, 2, 2, 2);
             BtnRBracket.Name = "BtnRBracket";
-            BtnRBracket.Size = new Size(160, 115);
+            BtnRBracket.Size = new Size(80, 63);
             BtnRBracket.TabIndex = 31;
             BtnRBracket.Text = ")";
             BtnRBracket.UseVisualStyleBackColor = true;
@@ -158,9 +165,10 @@ namespace simple_calculator
             // BtnLBracket
             // 
             BtnLBracket.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            BtnLBracket.Location = new Point(41, 45);
+            BtnLBracket.Location = new Point(20, 25);
+            BtnLBracket.Margin = new Padding(2, 2, 2, 2);
             BtnLBracket.Name = "BtnLBracket";
-            BtnLBracket.Size = new Size(160, 115);
+            BtnLBracket.Size = new Size(80, 63);
             BtnLBracket.TabIndex = 30;
             BtnLBracket.Text = "(";
             BtnLBracket.UseVisualStyleBackColor = true;
@@ -169,9 +177,10 @@ namespace simple_calculator
             // BtnTimes
             // 
             BtnTimes.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            BtnTimes.Location = new Point(641, 200);
+            BtnTimes.Location = new Point(320, 110);
+            BtnTimes.Margin = new Padding(2, 2, 2, 2);
             BtnTimes.Name = "BtnTimes";
-            BtnTimes.Size = new Size(160, 115);
+            BtnTimes.Size = new Size(80, 63);
             BtnTimes.TabIndex = 28;
             BtnTimes.Text = "×";
             BtnTimes.UseVisualStyleBackColor = true;
@@ -180,9 +189,10 @@ namespace simple_calculator
             // Btn9
             // 
             Btn9.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            Btn9.Location = new Point(441, 200);
+            Btn9.Location = new Point(220, 110);
+            Btn9.Margin = new Padding(2, 2, 2, 2);
             Btn9.Name = "Btn9";
-            Btn9.Size = new Size(160, 115);
+            Btn9.Size = new Size(80, 63);
             Btn9.TabIndex = 27;
             Btn9.Text = "9";
             Btn9.UseVisualStyleBackColor = true;
@@ -191,9 +201,10 @@ namespace simple_calculator
             // Btn8
             // 
             Btn8.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            Btn8.Location = new Point(241, 200);
+            Btn8.Location = new Point(120, 110);
+            Btn8.Margin = new Padding(2, 2, 2, 2);
             Btn8.Name = "Btn8";
-            Btn8.Size = new Size(160, 115);
+            Btn8.Size = new Size(80, 63);
             Btn8.TabIndex = 26;
             Btn8.Text = "8";
             Btn8.UseVisualStyleBackColor = true;
@@ -202,9 +213,10 @@ namespace simple_calculator
             // BtnMinus
             // 
             BtnMinus.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            BtnMinus.Location = new Point(641, 355);
+            BtnMinus.Location = new Point(320, 195);
+            BtnMinus.Margin = new Padding(2, 2, 2, 2);
             BtnMinus.Name = "BtnMinus";
-            BtnMinus.Size = new Size(160, 115);
+            BtnMinus.Size = new Size(80, 63);
             BtnMinus.TabIndex = 25;
             BtnMinus.Text = "-";
             BtnMinus.UseVisualStyleBackColor = true;
@@ -213,9 +225,10 @@ namespace simple_calculator
             // Btn6
             // 
             Btn6.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            Btn6.Location = new Point(441, 355);
+            Btn6.Location = new Point(220, 195);
+            Btn6.Margin = new Padding(2, 2, 2, 2);
             Btn6.Name = "Btn6";
-            Btn6.Size = new Size(160, 115);
+            Btn6.Size = new Size(80, 63);
             Btn6.TabIndex = 24;
             Btn6.Text = "6";
             Btn6.UseVisualStyleBackColor = true;
@@ -224,9 +237,10 @@ namespace simple_calculator
             // Btn5
             // 
             Btn5.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            Btn5.Location = new Point(241, 355);
+            Btn5.Location = new Point(120, 195);
+            Btn5.Margin = new Padding(2, 2, 2, 2);
             Btn5.Name = "Btn5";
-            Btn5.Size = new Size(160, 115);
+            Btn5.Size = new Size(80, 63);
             Btn5.TabIndex = 23;
             Btn5.Text = "5";
             Btn5.UseVisualStyleBackColor = true;
@@ -235,9 +249,10 @@ namespace simple_calculator
             // BtnPlus
             // 
             BtnPlus.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            BtnPlus.Location = new Point(641, 510);
+            BtnPlus.Location = new Point(320, 280);
+            BtnPlus.Margin = new Padding(2, 2, 2, 2);
             BtnPlus.Name = "BtnPlus";
-            BtnPlus.Size = new Size(160, 115);
+            BtnPlus.Size = new Size(80, 63);
             BtnPlus.TabIndex = 22;
             BtnPlus.Text = "+";
             BtnPlus.UseVisualStyleBackColor = true;
@@ -246,9 +261,10 @@ namespace simple_calculator
             // Btn3
             // 
             Btn3.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            Btn3.Location = new Point(441, 510);
+            Btn3.Location = new Point(220, 280);
+            Btn3.Margin = new Padding(2, 2, 2, 2);
             Btn3.Name = "Btn3";
-            Btn3.Size = new Size(160, 115);
+            Btn3.Size = new Size(80, 63);
             Btn3.TabIndex = 21;
             Btn3.Text = "3";
             Btn3.UseVisualStyleBackColor = true;
@@ -257,9 +273,10 @@ namespace simple_calculator
             // Btn2
             // 
             Btn2.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            Btn2.Location = new Point(241, 510);
+            Btn2.Location = new Point(120, 280);
+            Btn2.Margin = new Padding(2, 2, 2, 2);
             Btn2.Name = "Btn2";
-            Btn2.Size = new Size(160, 115);
+            Btn2.Size = new Size(80, 63);
             Btn2.TabIndex = 20;
             Btn2.Text = "2";
             Btn2.UseVisualStyleBackColor = true;
@@ -268,9 +285,10 @@ namespace simple_calculator
             // BtnEqual
             // 
             BtnEqual.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            BtnEqual.Location = new Point(641, 665);
+            BtnEqual.Location = new Point(320, 365);
+            BtnEqual.Margin = new Padding(2, 2, 2, 2);
             BtnEqual.Name = "BtnEqual";
-            BtnEqual.Size = new Size(160, 115);
+            BtnEqual.Size = new Size(80, 63);
             BtnEqual.TabIndex = 19;
             BtnEqual.Text = "=";
             BtnEqual.UseVisualStyleBackColor = true;
@@ -279,9 +297,10 @@ namespace simple_calculator
             // BtnDel
             // 
             BtnDel.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            BtnDel.Location = new Point(441, 665);
+            BtnDel.Location = new Point(220, 365);
+            BtnDel.Margin = new Padding(2, 2, 2, 2);
             BtnDel.Name = "BtnDel";
-            BtnDel.Size = new Size(160, 115);
+            BtnDel.Size = new Size(80, 63);
             BtnDel.TabIndex = 18;
             BtnDel.Text = "DEL";
             BtnDel.UseVisualStyleBackColor = true;
@@ -290,9 +309,10 @@ namespace simple_calculator
             // Btn0
             // 
             Btn0.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            Btn0.Location = new Point(241, 665);
+            Btn0.Location = new Point(120, 365);
+            Btn0.Margin = new Padding(2, 2, 2, 2);
             Btn0.Name = "Btn0";
-            Btn0.Size = new Size(160, 115);
+            Btn0.Size = new Size(80, 63);
             Btn0.TabIndex = 17;
             Btn0.Text = "0";
             Btn0.UseVisualStyleBackColor = true;
@@ -301,9 +321,10 @@ namespace simple_calculator
             // BtnDot
             // 
             BtnDot.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            BtnDot.Location = new Point(41, 665);
+            BtnDot.Location = new Point(20, 365);
+            BtnDot.Margin = new Padding(2, 2, 2, 2);
             BtnDot.Name = "BtnDot";
-            BtnDot.Size = new Size(160, 115);
+            BtnDot.Size = new Size(80, 63);
             BtnDot.TabIndex = 16;
             BtnDot.Text = ".";
             BtnDot.UseVisualStyleBackColor = true;
@@ -312,9 +333,10 @@ namespace simple_calculator
             // Btn1
             // 
             Btn1.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            Btn1.Location = new Point(41, 510);
+            Btn1.Location = new Point(20, 280);
+            Btn1.Margin = new Padding(2, 2, 2, 2);
             Btn1.Name = "Btn1";
-            Btn1.Size = new Size(160, 115);
+            Btn1.Size = new Size(80, 63);
             Btn1.TabIndex = 12;
             Btn1.Text = "1";
             Btn1.UseVisualStyleBackColor = true;
@@ -323,9 +345,10 @@ namespace simple_calculator
             // Btn4
             // 
             Btn4.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            Btn4.Location = new Point(41, 355);
+            Btn4.Location = new Point(20, 195);
+            Btn4.Margin = new Padding(2, 2, 2, 2);
             Btn4.Name = "Btn4";
-            Btn4.Size = new Size(160, 115);
+            Btn4.Size = new Size(80, 63);
             Btn4.TabIndex = 8;
             Btn4.Text = "4";
             Btn4.UseVisualStyleBackColor = true;
@@ -334,9 +357,10 @@ namespace simple_calculator
             // Btn7
             // 
             Btn7.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            Btn7.Location = new Point(41, 200);
+            Btn7.Location = new Point(20, 110);
+            Btn7.Margin = new Padding(2, 2, 2, 2);
             Btn7.Name = "Btn7";
-            Btn7.Size = new Size(160, 115);
+            Btn7.Size = new Size(80, 63);
             Btn7.TabIndex = 4;
             Btn7.Text = "7";
             Btn7.UseVisualStyleBackColor = true;
@@ -345,9 +369,10 @@ namespace simple_calculator
             // BtnDivide
             // 
             BtnDivide.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            BtnDivide.Location = new Point(641, 45);
+            BtnDivide.Location = new Point(320, 25);
+            BtnDivide.Margin = new Padding(2, 2, 2, 2);
             BtnDivide.Name = "BtnDivide";
-            BtnDivide.Size = new Size(160, 115);
+            BtnDivide.Size = new Size(80, 63);
             BtnDivide.TabIndex = 3;
             BtnDivide.Text = "÷";
             BtnDivide.UseVisualStyleBackColor = true;
@@ -355,11 +380,12 @@ namespace simple_calculator
             // 
             // CalForm
             // 
-            AutoScaleDimensions = new SizeF(14F, 31F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1041, 986);
+            ClientSize = new Size(528, 541);
             Controls.Add(panel2);
             Controls.Add(panel1);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "CalForm";
             Text = "Calculator";
             Load += CalForm_Load;

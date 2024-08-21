@@ -210,8 +210,9 @@ namespace simple_calculator
         /// <exception cref="NotImplementedException"></exception>
         private void BtnEqual_Click(object sender, EventArgs e)
         {
+            string ans = Calculate().ToString();
             display += "=";
-            display += Calculate().ToString();
+            display += ans;
             UpdateDisplay();
             AddToHistory(display);
             display = "";//清空显示字符串，等待下一次输入

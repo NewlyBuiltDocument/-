@@ -48,9 +48,13 @@ namespace simple_calculator
             int? f = null, g = a.Length;
             for (; b < g && (a[b] >= '0' && a[b] <= '9' || a[b] == '.'); ++b)
             {
+                if (f != null)
+                {
+                    ++f;
+                }
                 if (a[b] == '.')
                 {
-                    f = b;
+                    f = 0;
                 }
                 else
                 {
@@ -84,6 +88,11 @@ namespace simple_calculator
         private static void Sshu(ref string a, ref List<double> b, int c, int d)
         {
             char[] de = ['+', '-'], df = ['*', '/'], dg = ['^'];
+            for (int e = a.IndexOfAny(dg, c), f; e != -1 && e < d; a = a.Remove(e, 2), d -= 2, b.RemoveAt(f), e = a.IndexOfAny(df, e))
+            {
+                f = Chshu(ref a, 0, e);
+                b[f - 1] = Math.Pow(b[f - 1], b[f]);
+            }
             for (int e = a.IndexOfAny(de, c), f = (e == -1 ? 0 : a.IndexNotOfAny(de, e)); e != -1 && e < d;)
             {
                 if (e != 0 && a[e - 1] == ' ')
@@ -96,11 +105,6 @@ namespace simple_calculator
                 d -= f - e;
                 e = a.IndexOfAny(de, e);
                 f = e == -1 ? 0 : a.IndexNotOfAny(de, e);
-            }
-            for (int e = a.IndexOfAny(dg, c), f; e != -1 && e < d; a = a.Remove(e, 2), d -= 2, b.RemoveAt(f), e = a.IndexOfAny(df, e))
-            {
-                f = Chshu(ref a, 0, e);
-                b[f - 1] = Math.Pow(b[f - 1], b[f]);
             }
             for (int e = a.IndexOfAny(df, c), f; e != -1 && e < d; a = a.Remove(e, 2), d -= 2, b.RemoveAt(f), e = a.IndexOfAny(df, e))
             {
@@ -141,7 +145,7 @@ namespace simple_calculator
                     Sshu(ref b, ref c, e + 1, d);
                     b = b.Remove(e, 1).Remove(e + 1, 1);
                     f = Chshu(ref b, 0, e);
-                    if (b.Length > e && b[e + 1] == ' ')
+                    if (b.Length > e + 1 && b[e + 1] == ' ')
                     {
                         c[f] *= c[f + 1];
                         b = b.Remove(e, 1);

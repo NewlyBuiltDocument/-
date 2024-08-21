@@ -1,4 +1,4 @@
-using System.Data.SQLite;
+ï»¿using System.Data.SQLite;
 
 namespace simple_calculator
 {
@@ -22,16 +22,16 @@ namespace simple_calculator
         }
 
         /// <summary>
-        /// ¼ì²éÊı¾İ¿âÎÄ¼şÊÇ·ñ´æÔÚ£¬²»´æÔÚÔò³õÊ¼»¯
+        /// æ£€æŸ¥æ•°æ®åº“æ–‡ä»¶æ˜¯å¦å­˜åœ¨ï¼Œä¸å­˜åœ¨åˆ™åˆå§‹åŒ–
         /// </summary>
         private static void InitializeDatabase()
         {
             string fileName = "database.db";
 
-            // ¼ì²éÊı¾İ¿âÎÄ¼şÊÇ·ñ´æÔÚ
+            // æ£€æŸ¥æ•°æ®åº“æ–‡ä»¶æ˜¯å¦å­˜åœ¨
             if (!File.Exists(fileName))
             {
-                // ³õÊ¼»¯Êı¾İ¿âÎÄ¼ş
+                // åˆå§‹åŒ–æ•°æ®åº“æ–‡ä»¶
                 File.Create(fileName).Dispose();
                 using SQLiteConnection conn = new(myConnectionString);
                 conn.Open();
@@ -42,7 +42,7 @@ namespace simple_calculator
 
                 catch (SQLiteException)
                 {
-                    MessageBox.Show("ÎŞ·¨³õÊ¼»¯Êı¾İ¿â£¡");
+                    MessageBox.Show("æ— æ³•åˆå§‹åŒ–æ•°æ®åº“ï¼");
                 }
             }
         }

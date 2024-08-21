@@ -1,10 +1,10 @@
-using System.Data.SQLite;
+ï»¿using System.Data.SQLite;
 
 namespace simple_calculator
 {
     public partial class CalForm : Form
     {
-        //ÏÔÊ¾×Ö·û´®
+        //æ˜¾ç¤ºå­—ç¬¦ä¸²
         public string display = "";
         
         public CalForm()
@@ -18,7 +18,7 @@ namespace simple_calculator
         }
 
         /// <summary>
-        /// ¸üĞÂÏÔÊ¾µÄÄÚÈİ
+        /// æ›´æ–°æ˜¾ç¤ºçš„å†…å®¹
         /// </summary>
         private void UpdateDisplay()
         {
@@ -26,7 +26,7 @@ namespace simple_calculator
         }
 
         /// <summary>
-        /// °´ÏÂµÈÓÚÊ±Ö´ĞĞ¼ÆËã³ÌĞò
+        /// æŒ‰ä¸‹ç­‰äºæ—¶æ‰§è¡Œè®¡ç®—ç¨‹åº
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -34,16 +34,16 @@ namespace simple_calculator
         private void BtnEqual_Click(object sender, EventArgs e)
         {
             display += "=";
-            display += "ans";//´Ë´¦Ó¦Îª¼ÆËã½á¹û
+            display += "ans";//æ­¤å¤„åº”ä¸ºè®¡ç®—ç»“æœ
             UpdateDisplay();
             AddToHistory(display);
-            display = "";//Çå¿ÕÏÔÊ¾×Ö·û´®£¬µÈ´ıÏÂÒ»´ÎÊäÈë
+            display = "";//æ¸…ç©ºæ˜¾ç¤ºå­—ç¬¦ä¸²ï¼Œç­‰å¾…ä¸‹ä¸€æ¬¡è¾“å…¥
         }
 
         /// <summary>
-        /// ½«¼ÆËã½á¹ûÌí¼Óµ½ÀúÊ·¼ÇÂ¼
+        /// å°†è®¡ç®—ç»“æœæ·»åŠ åˆ°å†å²è®°å½•
         /// </summary>
-        /// <param name="result">ÉÏÒ»´Î½á¹ûµÄ×Ö·û´®</param>
+        /// <param name="result">ä¸Šä¸€æ¬¡ç»“æœçš„å­—ç¬¦ä¸²</param>
         private static void AddToHistory(string result)
         {
             using SQLiteConnection conn = new(Program.myConnectionString);
@@ -54,12 +54,12 @@ namespace simple_calculator
             try { cmd.ExecuteNonQuery(); }
             catch (SQLiteException)
             {
-                MessageBox.Show("ÎŞ·¨Ìí¼Óµ½ÀúÊ·£¡");
+                MessageBox.Show("æ— æ³•æ·»åŠ åˆ°å†å²ï¼");
             }
         }
 
         /// <summary>
-        /// ÏÔÊ¾ÀúÊ·¼ÇÂ¼
+        /// æ˜¾ç¤ºå†å²è®°å½•
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -70,7 +70,7 @@ namespace simple_calculator
         }
 
         /// <summary>
-        /// É¾³ı×îºóÒ»¸ö×Ö·û
+        /// åˆ é™¤æœ€åä¸€ä¸ªå­—ç¬¦
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -81,7 +81,7 @@ namespace simple_calculator
         }
 
         /// <summary>
-        /// Çå¿ÕÊäÈë
+        /// æ¸…ç©ºè¾“å…¥
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

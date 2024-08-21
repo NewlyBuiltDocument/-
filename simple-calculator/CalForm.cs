@@ -71,12 +71,12 @@ namespace simple_calculator
             List<double> a = [];
             str = str.Replace(" ", null);
             char[] c = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
-            for (int d = str.IndexOfAny(c), e = str.IndexNotOfAny(c, d); d != -1;)
+            for (int d = str.IndexOfAny(c), e = (d == -1 ? 0 : str.IndexNotOfAny(c, d)); d != -1;)
             {
                 a.Add(Svtoty(ref str, d));
                 str = string.Concat(str.AsSpan(0, d), " ", e == -1 ? null : str.AsSpan(e));
                 d = str.IndexOfAny(c);
-                e = str.IndexNotOfAny(c, d);
+                e = (d == -1 ? 0 : str.IndexNotOfAny(c, d));
             }
             return a;
         }
@@ -84,7 +84,7 @@ namespace simple_calculator
         private static void Sshu(ref string a, ref List<double> b, int c, int d)
         {
             char[] de = ['+', '-'], df = ['*', '/'];
-            for (int e = a.IndexOfAny(de, c), f = a.IndexNotOfAny(de, e); e < d; e = a.IndexOfAny(de, e), f = a.IndexNotOfAny(de, e))
+            for (int e = a.IndexOfAny(de, c), f = (e == -1 ? 0 : a.IndexNotOfAny(de, e)); e != -1 && e < d;)
             {
                 if (e != 0 && a[e - 1] == ' ')
                 {
@@ -94,8 +94,10 @@ namespace simple_calculator
                 b[Chshu(ref a, 0, e)] *= (Chshu(ref a, e, f - e, '-') % 2 != 0 ? -1 : 1);
                 a = a.Remove(e, f - e);
                 d -= f - e;
+                e = a.IndexOfAny(de, e);
+                f = e == -1 ? 0 : a.IndexNotOfAny(de, e);
             }
-            for (int e = a.IndexOfAny(df, c), f; e < d; a = a.Remove(e, 2), d -= 2, b.RemoveAt(f), e = a.IndexOfAny(df, e))
+            for (int e = a.IndexOfAny(df, c), f; e != -1 && e < d; a = a.Remove(e, 2), d -= 2, b.RemoveAt(f), e = a.IndexOfAny(df, e))
             {
                 f = Chshu(ref a, 0, e);
                 if (a[e] == '*')
@@ -107,7 +109,7 @@ namespace simple_calculator
                     b[f - 1] /= b[f];
                 }
             }
-            for (int e = a.IndexOfAny(de, c), f; e < d; a = a.Remove(e, 2), d -= 2, b.RemoveAt(f), e = a.IndexOfAny(de, e))
+            for (int e = a.IndexOfAny(de, c), f; e != -1 && e < d; a = a.Remove(e, 2), d -= 2, b.RemoveAt(f), e = a.IndexOfAny(de, e))
             {
                 f = Chshu(ref a, 0, e);
                 if (a[e] == '+')

@@ -1,9 +1,12 @@
+using System.Data.SQLite;
+
 namespace simple_calculator
 {
     public partial class CalForm : Form
     {
         //显示字符串
         public string display = "";
+        
         public CalForm()
         {
             InitializeComponent();
@@ -11,7 +14,7 @@ namespace simple_calculator
 
         private void CalForm_Load(object sender, EventArgs e)
         {
-            DisplayText.Text = display;
+            UpdateDisplay();
         }
 
         /// <summary>
@@ -33,7 +36,22 @@ namespace simple_calculator
             display += "=";
             display += "ans";//此处应为计算结果
             UpdateDisplay();
-            throw new NotImplementedException();
+            AddToHistory(display);
+            display = "";//清空显示字符串，等待下一次输入
+        }
+
+        private static void AddToHistory(string result)
+        {
+            using SQLiteConnection conn = new(Program.myConnectionString);
+            conn.Open();
+            SQLiteCommand cmd = new();
+            string insertStr = $"INSERT INTO history (results) VALUES ('{result}');";
+            cmd = new SQLiteCommand(insertStr, conn);
+            try { cmd.ExecuteNonQuery(); }
+            catch (SQLiteException)
+            {
+                MessageBox.Show("无法添加到历史！");
+            }
         }
 
         private void BtnHistory_Click(object sender, EventArgs e)

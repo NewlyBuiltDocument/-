@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DgvHistory = new DataGridView();
             BtnDel = new Button();
             ((System.ComponentModel.ISupportInitialize)DgvHistory).BeginInit();
@@ -39,32 +40,46 @@
             DgvHistory.AllowUserToDeleteRows = false;
             DgvHistory.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             DgvHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            DgvHistory.DefaultCellStyle = dataGridViewCellStyle1;
             DgvHistory.Location = new Point(0, 0);
+            DgvHistory.Margin = new Padding(2);
             DgvHistory.Name = "DgvHistory";
             DgvHistory.RowHeadersWidth = 82;
-            DgvHistory.Size = new Size(1301, 567);
+            DgvHistory.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DgvHistory.Size = new Size(650, 311);
             DgvHistory.TabIndex = 0;
             // 
             // BtnDel
             // 
             BtnDel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             BtnDel.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            BtnDel.Location = new Point(73, 597);
+            BtnDel.Location = new Point(36, 327);
+            BtnDel.Margin = new Padding(2);
             BtnDel.Name = "BtnDel";
-            BtnDel.Size = new Size(1172, 157);
+            BtnDel.Size = new Size(586, 86);
             BtnDel.TabIndex = 1;
             BtnDel.Text = "删除";
             BtnDel.UseVisualStyleBackColor = true;
+            BtnDel.Click += BtnDel_Click;
             // 
             // HistoryForm
             // 
-            AutoScaleDimensions = new SizeF(14F, 31F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1301, 787);
+            ClientSize = new Size(650, 432);
             Controls.Add(BtnDel);
             Controls.Add(DgvHistory);
+            Margin = new Padding(2);
             Name = "HistoryForm";
             Text = "History";
+            Load += HistoryForm_Load;
             ((System.ComponentModel.ISupportInitialize)DgvHistory).EndInit();
             ResumeLayout(false);
         }

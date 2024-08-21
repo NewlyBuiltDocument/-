@@ -63,7 +63,11 @@ namespace simple_calculator
                     id = dataTable.Rows[selectedRow.Index][0];
                     string delStr = $"DELETE FROM history where id={id};";
                     cmd = new SQLiteCommand(delStr, conn);
-                    cmd.ExecuteNonQuery();
+                    try { cmd.ExecuteNonQuery(); }
+                    catch (SQLiteException)
+                    {
+                        MessageBox.Show("无法删除！");
+                    }
                 }
                 UpdateHistory();
             }

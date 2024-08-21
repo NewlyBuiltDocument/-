@@ -26,7 +26,7 @@ namespace simple_calculator
         }
 
         /// <summary>
-        /// 按下等于时执行计算
+        /// 按下等于时执行计算程序
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -40,6 +40,10 @@ namespace simple_calculator
             display = "";//清空显示字符串，等待下一次输入
         }
 
+        /// <summary>
+        /// 将计算结果添加到历史记录
+        /// </summary>
+        /// <param name="result">上一次结果的字符串</param>
         private static void AddToHistory(string result)
         {
             using SQLiteConnection conn = new(Program.myConnectionString);
@@ -54,18 +58,33 @@ namespace simple_calculator
             }
         }
 
+        /// <summary>
+        /// 显示历史记录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnHistory_Click(object sender, EventArgs e)
         {
             HistoryForm historyForm = new();
             historyForm.ShowDialog();
         }
 
+        /// <summary>
+        /// 删除最后一个字符
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnDel_Click(object sender, EventArgs e)
         {
             display = display.Remove(display.Length - 1);
             UpdateDisplay();
         }
 
+        /// <summary>
+        /// 清空输入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnClear_Click(object sender, EventArgs e)
         {
             display = "";

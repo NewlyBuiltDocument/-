@@ -21,6 +21,9 @@ namespace simple_calculator
 
         }
 
+        /// <summary>
+        /// 检查数据库文件是否存在，不存在则初始化
+        /// </summary>
         private static void InitializeDatabase()
         {
             string fileName = "database.db";

@@ -2,6 +2,9 @@
 
 namespace simple_calculator
 {
+    /// <summary>
+    /// 窗体类，需为第一个类以便设计器渲染
+    /// </summary>
     public partial class CalForm : Form
     {
         //显示字符串

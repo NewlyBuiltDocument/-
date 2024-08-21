@@ -83,7 +83,7 @@ namespace simple_calculator
         //无括号部分计算
         private static void Sshu(ref string a, ref List<double> b, int c, int d)
         {
-            char[] de = ['+', '-'], df = ['*', '/'];
+            char[] de = ['+', '-'], df = ['*', '/'], dg = ['^'];
             for (int e = a.IndexOfAny(de, c), f = (e == -1 ? 0 : a.IndexNotOfAny(de, e)); e != -1 && e < d;)
             {
                 if (e != 0 && a[e - 1] == ' ')
@@ -96,6 +96,11 @@ namespace simple_calculator
                 d -= f - e;
                 e = a.IndexOfAny(de, e);
                 f = e == -1 ? 0 : a.IndexNotOfAny(de, e);
+            }
+            for (int e = a.IndexOfAny(dg, c), f; e != -1 && e < d; a = a.Remove(e, 2), d -= 2, b.RemoveAt(f), e = a.IndexOfAny(df, e))
+            {
+                f = Chshu(ref a, 0, e);
+                b[f - 1] = Math.Pow(b[f - 1], b[f]);
             }
             for (int e = a.IndexOfAny(df, c), f; e != -1 && e < d; a = a.Remove(e, 2), d -= 2, b.RemoveAt(f), e = a.IndexOfAny(df, e))
             {

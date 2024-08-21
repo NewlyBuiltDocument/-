@@ -10,12 +10,18 @@ namespace simple_calculator
             for (int a = startIndex; a < str.Length; ++a)
             {
                 char b = str[a];
-                foreach (char c in anyOf)
+                bool c = true;
+                foreach (char d in anyOf)
                 {
-                    if (b == c)
+                    if (b == d)
                     {
-                        return a;
+                        c = false;
+                        break;
                     }
+                }
+                if (c)
+                {
+                    return a;
                 }
             }
             return -1;
@@ -210,8 +216,9 @@ namespace simple_calculator
         /// <exception cref="NotImplementedException"></exception>
         private void BtnEqual_Click(object sender, EventArgs e)
         {
+            string ans = Calculate().ToString();
             display += "=";
-            display += Calculate().ToString();
+            display += ans;
             UpdateDisplay();
             AddToHistory(display);
             display = "";//清空显示字符串，等待下一次输入

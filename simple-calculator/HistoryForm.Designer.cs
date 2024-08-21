@@ -39,6 +39,7 @@
             DgvHistory.AllowUserToAddRows = false;
             DgvHistory.AllowUserToDeleteRows = false;
             DgvHistory.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            DgvHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             DgvHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Window;

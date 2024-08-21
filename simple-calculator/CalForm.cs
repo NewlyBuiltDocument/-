@@ -204,8 +204,15 @@ namespace simple_calculator
         /// <exception cref="NotImplementedException"></exception>
         private void BtnEqual_Click(object sender, EventArgs e)
         {
-            string ans = Calculate(display).ToString();
-            //string ans = "ans";
+            string ans = "";
+            try
+            {
+                ans = Calculate(display).ToString();
+            }
+            catch {
+                MessageBox.Show("输入有误！");
+                return;
+            }
             display += "=";
             display += ans;
             UpdateDisplay();

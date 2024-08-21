@@ -7,7 +7,8 @@ namespace simple_calculator
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
-        private const string myConnectionString = "Data Source=database.db";
+        public const string myConnectionString = "Data Source=database.db";
+        
         [STAThread]
         static void Main()
         {
@@ -32,7 +33,7 @@ namespace simple_calculator
                 using SQLiteConnection conn = new(myConnectionString);
                 conn.Open();
                 SQLiteCommand cmd = new();
-                string iniStr = "CREATE TABLE history (results TEXT(50))";
+                string iniStr = "CREATE TABLE history (id INTEGER PRIMARY KEY AUTOINCREMENT, results TEXT(50));";
                 cmd = new SQLiteCommand(iniStr, conn);
                 try { cmd.ExecuteNonQuery(); }
 

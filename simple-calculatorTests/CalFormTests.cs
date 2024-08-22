@@ -24,6 +24,12 @@ public class CalFormTests
     [DataRow("((3.5+2)*4-1)/6", ((3.5 + 2) * 4 - 1) / 6.0)]
     [DataRow("((3.5+2)^2-1)/6", (30.25 - 1) / 6.0)]
     [DataRow("-2^2", -4)]
+    [DataRow("(-2)*7", -14)]
+    [DataRow("7^(-2)", 1 / 49.0)]
+    [DataRow("7^(+2)", 49)]
+    [DataRow("+2-5*(-7)", 37)]
+    [DataRow("(+3)*(-5)", -15)]
+    [DataRow("(-3)*(-5)", 15)]
     public void CalculateTest(string input, double expected)
     {
         double result = AnyCalculate.Calculate(input);
@@ -116,6 +122,22 @@ public class CalFormTests
     public void CanInsertOperatorTest(string expression, bool expected)
     {
         bool result = CalForm.CanInsertOperator(expression);
+        Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod()]
+    [Timeout(2000)]
+    [DataRow("1+2", "+", "1+2+")]
+    [DataRow("1+2", "-", "1+2-")]
+    [DataRow("", "-", "-")]
+    [DataRow("1+", "-", "1-")]
+    [DataRow("1-", "+", "1+")]
+    [DataRow("1-", "-", "1-")]
+    [DataRow("2*", "+", "2*(+")]
+    [DataRow("3^", "-", "3^(-")]
+    public void ValidSymbolsTest(string expression, string op, string expected)
+    {
+        string result = CalForm.ValidSymbols(expression, op);
         Assert.AreEqual(expected, result);
     }
 }

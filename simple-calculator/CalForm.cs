@@ -83,7 +83,7 @@ public partial class CalForm : Form
     /// 检测右括号输入时的合法性
     /// </summary>
     /// <param name="expression">输入右括号后的字符串</param>
-    /// <returns>修改后的字符串</returns>
+    /// <returns>输入操作后的字符串</returns>
     public static string ValidRightBrackets(string expression)
     {
         //如果左括号数量小于右括号数量，删除右括号
@@ -106,7 +106,7 @@ public partial class CalForm : Form
     /// 检测小数点输入时的合法性，自动补齐前面的0
     /// </summary>
     /// <param name="expression">输入小数点前的字符串</param>
-    /// <returns>输入后的字符串</returns>
+    /// <returns>输入操作后的字符串</returns>
     public static string ValidDot(string expression)
     {
         if (expression[^1] == '.')
@@ -133,7 +133,7 @@ public partial class CalForm : Form
     /// 检测左括号输入时的合法性，自动补全乘号
     /// </summary>
     /// <param name="expression">输入左括号前的字符串</param>
-    /// <returns>输入后的字符串</returns>
+    /// <returns>输入操作后的字符串</returns>
     public static string ValidLeftBrackets(string expression)
     {
         if (expression.Length == 0)
@@ -192,6 +192,32 @@ public partial class CalForm : Form
     }
 
     /// <summary>
+    /// 检测是否可以插入符号
+    /// </summary>
+    /// <param name="expression">待插入的字符串</param>
+    /// <param name="symbol">符号类型</param>
+    /// <returns>插入操作后的字符串</returns>
+    public static string ValidSymbols(string expression, string symbol)
+    {
+        if (expression.Length == 0)
+        {
+            return symbol;
+        }
+        else if (Regex.Match(expression, @"[\*/^]$", RegexOptions.Compiled).Success)
+        {
+            return expression + "(" + symbol;
+        }
+        else if (Regex.Match(expression, @"[+\-]$", RegexOptions.Compiled).Success)
+        {
+            return expression.Remove(expression.Length - 1) + symbol;
+        }
+        else
+        {
+            return expression + symbol;
+        }
+    }
+
+    /// <summary>
     /// 按下数字键时执行的操作
     /// </summary>
     /// <param name="sender"></param>
@@ -215,28 +241,38 @@ public partial class CalForm : Form
     {
         if (sender is Button clickedButton)
         {
-            if (CanInsertOperator(display))
+            string buttonText = clickedButton.Text;
+            switch (buttonText)
             {
-                string buttonText = clickedButton.Text;
-                switch (buttonText)
-                {
-                    case "+":
-                        display += "+";
-                        break;
-                    case "-":
-                        display += "-";
-                        break;
-                    case "×":
+                case "+":
+                    display = ValidSymbols(display, "+");
+                    UpdateDisplay();
+                    break;
+                case "-":
+                    display = ValidSymbols(display, "-");
+                    UpdateDisplay();
+                    break;
+                case "×":
+                    if (CanInsertOperator(display))
+                    {
                         display += "*";
-                        break;
-                    case "÷":
+                        UpdateDisplay();
+                    }
+                    break;
+                case "÷":
+                    if (CanInsertOperator(display))
+                    {
                         display += "/";
-                        break;
-                    case "^":
+                        UpdateDisplay();
+                    }
+                    break;
+                case "^":
+                    if (CanInsertOperator(display))
+                    {
                         display += "^";
-                        break;
-                }
-                UpdateDisplay();
+                        UpdateDisplay();
+                    }
+                    break;
             }
         }
     }
@@ -276,7 +312,10 @@ public partial class CalForm : Form
         using SQLiteConnection conn = new(Program.myConnectionString);
         conn.Open();
         SQLiteCommand cmd = new();
-        string insertStr = $"INSERT INTO history (results) VALUES ('{result}');";
+
+        DateTime dateTime = DateTime.Now;
+        string time = dateTime.ToString("yyyy-MM-dd HH:mm:ss");
+        string insertStr = $"INSERT INTO history (time, results) VALUES ('{time}', '{result}');";
         cmd = new SQLiteCommand(insertStr, conn);
         try { cmd.ExecuteNonQuery(); }
         catch (SQLiteException)

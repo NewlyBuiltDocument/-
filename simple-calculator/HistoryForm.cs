@@ -36,7 +36,7 @@ public partial class HistoryForm : Form
             }
         }
     }
-    private void setControls(float newx, float newy, Control cons)
+    private static void SetControls(float newx, float newy, Control cons)
     {
         //遍历窗体中的控件，重新设置控件的值
         foreach (Control con in cons.Controls)
@@ -54,7 +54,7 @@ public partial class HistoryForm : Form
                 con.Font = new Font(con.Font.Name, currentSize, con.Font.Style, con.Font.Unit);
                 if (con.Controls.Count > 0)
                 {
-                    setControls(newx, newy, con);
+                    SetControls(newx, newy, con);
                 }
             }
         }
@@ -63,7 +63,7 @@ public partial class HistoryForm : Form
     {
         float newx = (this.Width) / x;
         float newy = (this.Height) / y;
-        setControls(newx, newy, this);
+        SetControls(newx, newy, this);
     }
 
     //endregion
@@ -84,15 +84,15 @@ public partial class HistoryForm : Form
         dataTable = new();
         adapter.Fill(dataTable);
 
-        DgvHistory.AutoGenerateColumns = false;
-        DgvHistory.Columns.Clear();
-        DgvHistory.Columns.Add(new DataGridViewTextBoxColumn
-        {
-            DataPropertyName = dataTable.Columns[1].ColumnName,
-            HeaderText = dataTable.Columns[1].ColumnName
-        });
-
         DgvHistory.DataSource = dataTable;
+        // 隐藏所有列
+        foreach (DataGridViewColumn column in DgvHistory.Columns)
+        {
+            column.Visible = false;
+        }
+        // 显示第二列和第三列
+        DgvHistory.Columns[1].Visible = true; // 第二列
+        DgvHistory.Columns[2].Visible = true; // 第三列
     }
 
     private void BtnDel_Click(object sender, EventArgs e)

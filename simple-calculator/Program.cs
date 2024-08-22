@@ -36,7 +36,7 @@ internal static class Program
             using SQLiteConnection conn = new(myConnectionString);
             conn.Open();
             SQLiteCommand cmd = new();
-            string iniStr = "CREATE TABLE history (id INTEGER PRIMARY KEY AUTOINCREMENT, results TEXT(50));";
+            string iniStr = "CREATE TABLE history (id INTEGER PRIMARY KEY AUTOINCREMENT, time TEXT(50), results TEXT(50));";
             cmd = new SQLiteCommand(iniStr, conn);
             try { cmd.ExecuteNonQuery(); }
 

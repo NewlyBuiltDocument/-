@@ -148,7 +148,7 @@ partial class CalForm
         BtnExp.TabIndex = 32;
         BtnExp.Text = "^";
         BtnExp.UseVisualStyleBackColor = true;
-        BtnExp.Click += BtnExp_Click;
+        BtnExp.Click += BtnOp_Click;
         // 
         // BtnRBracket
         // 
@@ -184,7 +184,7 @@ partial class CalForm
         BtnTimes.TabIndex = 28;
         BtnTimes.Text = "×";
         BtnTimes.UseVisualStyleBackColor = true;
-        BtnTimes.Click += BtnTimes_Click;
+        BtnTimes.Click += BtnOp_Click;
         // 
         // Btn9
         // 
@@ -196,7 +196,7 @@ partial class CalForm
         Btn9.TabIndex = 27;
         Btn9.Text = "9";
         Btn9.UseVisualStyleBackColor = true;
-        Btn9.Click += Btn9_Click;
+        Btn9.Click += BtnNum_Click;
         // 
         // Btn8
         // 
@@ -208,7 +208,7 @@ partial class CalForm
         Btn8.TabIndex = 26;
         Btn8.Text = "8";
         Btn8.UseVisualStyleBackColor = true;
-        Btn8.Click += Btn8_Click;
+        Btn8.Click += BtnNum_Click;
         // 
         // BtnMinus
         // 
@@ -220,7 +220,7 @@ partial class CalForm
         BtnMinus.TabIndex = 25;
         BtnMinus.Text = "-";
         BtnMinus.UseVisualStyleBackColor = true;
-        BtnMinus.Click += BtnMinus_Click;
+        BtnMinus.Click += BtnOp_Click;
         // 
         // Btn6
         // 
@@ -232,7 +232,7 @@ partial class CalForm
         Btn6.TabIndex = 24;
         Btn6.Text = "6";
         Btn6.UseVisualStyleBackColor = true;
-        Btn6.Click += Btn6_Click;
+        Btn6.Click += BtnNum_Click;
         // 
         // Btn5
         // 
@@ -244,7 +244,7 @@ partial class CalForm
         Btn5.TabIndex = 23;
         Btn5.Text = "5";
         Btn5.UseVisualStyleBackColor = true;
-        Btn5.Click += Btn5_Click;
+        Btn5.Click += BtnNum_Click;
         // 
         // BtnPlus
         // 
@@ -256,7 +256,7 @@ partial class CalForm
         BtnPlus.TabIndex = 22;
         BtnPlus.Text = "+";
         BtnPlus.UseVisualStyleBackColor = true;
-        BtnPlus.Click += BtnPlus_Click;
+        BtnPlus.Click += BtnOp_Click;
         // 
         // Btn3
         // 
@@ -268,7 +268,7 @@ partial class CalForm
         Btn3.TabIndex = 21;
         Btn3.Text = "3";
         Btn3.UseVisualStyleBackColor = true;
-        Btn3.Click += Btn3_Click;
+        Btn3.Click += BtnNum_Click;
         // 
         // Btn2
         // 
@@ -280,7 +280,7 @@ partial class CalForm
         Btn2.TabIndex = 20;
         Btn2.Text = "2";
         Btn2.UseVisualStyleBackColor = true;
-        Btn2.Click += Btn2_Click;
+        Btn2.Click += BtnNum_Click;
         // 
         // BtnEqual
         // 
@@ -316,7 +316,7 @@ partial class CalForm
         Btn0.TabIndex = 17;
         Btn0.Text = "0";
         Btn0.UseVisualStyleBackColor = true;
-        Btn0.Click += Btn0_Click;
+        Btn0.Click += BtnNum_Click;
         // 
         // BtnDot
         // 
@@ -340,7 +340,7 @@ partial class CalForm
         Btn1.TabIndex = 12;
         Btn1.Text = "1";
         Btn1.UseVisualStyleBackColor = true;
-        Btn1.Click += Btn1_Click;
+        Btn1.Click += BtnNum_Click;
         // 
         // Btn4
         // 
@@ -352,7 +352,7 @@ partial class CalForm
         Btn4.TabIndex = 8;
         Btn4.Text = "4";
         Btn4.UseVisualStyleBackColor = true;
-        Btn4.Click += Btn4_Click;
+        Btn4.Click += BtnNum_Click;
         // 
         // Btn7
         // 
@@ -364,7 +364,7 @@ partial class CalForm
         Btn7.TabIndex = 4;
         Btn7.Text = "7";
         Btn7.UseVisualStyleBackColor = true;
-        Btn7.Click += Btn7_Click;
+        Btn7.Click += BtnNum_Click;
         // 
         // BtnDivide
         // 
@@ -376,7 +376,7 @@ partial class CalForm
         BtnDivide.TabIndex = 3;
         BtnDivide.Text = "÷";
         BtnDivide.UseVisualStyleBackColor = true;
-        BtnDivide.Click += BtnDivide_Click;
+        BtnDivide.Click += BtnOp_Click;
         // 
         // CalForm
         // 

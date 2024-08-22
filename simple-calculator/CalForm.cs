@@ -1,5 +1,6 @@
 ﻿using System.Data.SQLite;
 using System.Text.RegularExpressions;
+using System.Windows.Forms; // Add this line to import the System.Windows.Forms namespace
 
 namespace simple_calculator;
 
@@ -33,7 +34,7 @@ public partial class CalForm : Form
             }
         }
     }
-    private void setControls(float newx, float newy, Control cons)
+    private static void SetControls(float newx, float newy, Control cons)
     {
         //遍历窗体中的控件，重新设置控件的值
         foreach (Control con in cons.Controls)
@@ -51,7 +52,7 @@ public partial class CalForm : Form
                 con.Font = new Font(con.Font.Name, currentSize, con.Font.Style, con.Font.Unit);
                 if (con.Controls.Count > 0)
                 {
-                    setControls(newx, newy, con);
+                    SetControls(newx, newy, con);
                 }
             }
         }
@@ -60,7 +61,7 @@ public partial class CalForm : Form
     {
         float newx = (this.Width) / x;
         float newy = (this.Height) / y;
-        setControls(newx, newy, this);
+        SetControls(newx, newy, this);
     }
 
     //endregion
@@ -77,30 +78,160 @@ public partial class CalForm : Form
     {
         DisplayText.Text = display;
     }
+    
+    /// <summary>
+    /// 检测右括号输入时的合法性
+    /// </summary>
+    /// <param name="expression">输入右括号后的字符串</param>
+    /// <returns>修改后的字符串</returns>
     public static string ValidRightBrackets(string expression)
     {
-        string pattern = @"\(\)";
-        Match match1 = Regex.Match(expression, pattern);
-        if (match1.Success)
+        //如果左括号数量小于右括号数量，删除右括号
+        if (Regex.Count(expression, @"\(", RegexOptions.Compiled) < Regex.Count(expression, @"\)", RegexOptions.Compiled))
         {
-            expression = Regex.Replace(expression, @"\)*", "");
+            Match match2 = Regex.Match(expression, @"\)", RegexOptions.RightToLeft | RegexOptions.Compiled);
+            expression = expression.Remove(match2.Index, 1);
+            return expression;
         }
-        if (Regex.Count(expression, @"\(") < Regex.Count(expression, @"\)"))
+        //如果右括号前面是运算符或左括号，删除右括号
+        if (Regex.Match(expression, @"[+\-\*/^(]\)", RegexOptions.Compiled).Success)
         {
-            Match match2 = Regex.Match(expression, @"\)", RegexOptions.RightToLeft);
+            Match match2 = Regex.Match(expression, @"\)", RegexOptions.RightToLeft | RegexOptions.Compiled);
             expression = expression.Remove(match2.Index, 1);
         }
         return expression;
     }
-    
 
+    /// <summary>
+    /// 检测小数点输入时的合法性，自动补齐前面的0
+    /// </summary>
+    /// <param name="expression">输入小数点前的字符串</param>
+    /// <returns>输入后的字符串</returns>
+    public static string ValidDot(string expression)
+    {
+        if (expression[^1] == '.')
+        {
+            return expression;
+        }
+        //如果最后一个字符是运算符，补全0
+        else if (Regex.Match(expression, @"[+\-\*/^(]$", RegexOptions.Compiled).Success)
+        {
+            return expression + "0.";
+        }
+        //如果最后一串数字中已经有小数点，不再添加
+        else if (Regex.Match(expression, @"\.[0-9]+?$", RegexOptions.Compiled).Success)
+        {
+            return expression;
+        }
+        else
+        {
+            return expression + ".";
+        }
+    }
+
+    /// <summary>
+    /// 检测左括号输入时的合法性，自动补全乘号
+    /// </summary>
+    /// <param name="expression">输入左括号前的字符串</param>
+    /// <returns>输入后的字符串</returns>
+    public static string ValidLeftBrackets(string expression)
+    {
+        if (expression.Length == 0)
+        {
+            return "(";
+        }
+        else if (expression[^1] == '.')
+        {
+            return expression;
+        }
+        //如果最后一个字符是数字，补全乘号
+        else if (Regex.Match(expression, @"[0-9]$", RegexOptions.Compiled).Success)
+        {
+            return expression + "*(";
+        }
+        else
+        {
+            return expression + "(";
+        }
+        
+    }
+
+    /// <summary>
+    /// 检测是否可以插入运算符
+    /// </summary>
+    /// <param name="expression">插入运算符前的字符串</param>
+    /// <returns>是否可以插入</returns>
+    public static bool CanInsertOperator(string expression)
+    {
+        if (expression.Length == 0)
+        {
+            return false;
+        }
+        else if (Regex.Match(expression, @"[+\-\*/^(]$", RegexOptions.Compiled).Success)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    /// <summary>
+    /// 按下数字键时执行的操作
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void BtnNum_Click(object sender, EventArgs e)
+    {
+        if (sender is Button clickedButton)
+        {
+            string buttonText = clickedButton.Text;
+            display += buttonText;
+            UpdateDisplay();
+        }
+    }
+    
+    /// <summary>
+    /// 按下运算符时执行的操作
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void BtnOp_Click(object sender, EventArgs e)
+    {
+        if (sender is Button clickedButton)
+        {
+            if (CanInsertOperator(display))
+            {
+                string buttonText = clickedButton.Text;
+                switch (buttonText)
+                {
+                    case "+":
+                        display += "+";
+                        break;
+                    case "-":
+                        display += "-";
+                        break;
+                    case "×":
+                        display += "*";
+                        break;
+                    case "÷":
+                        display += "/";
+                        break;
+                    case "^":
+                        display += "^";
+                        break;
+                }
+                UpdateDisplay();
+            }
+        }
+    }
 
     /// <summary>
     /// 按下等于时执行计算程序
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    /// <exception cref="NotImplementedException"></exception>
     private void BtnEqual_Click(object sender, EventArgs e)
     {
         if (display.Length != 0)//如果为空：没有输入或已经得到结果，应当什么也不做
@@ -175,75 +306,15 @@ public partial class CalForm : Form
         UpdateDisplay();
     }
 
-    private void Btn0_Click(object sender, EventArgs e)
-    {
-        display += "0";
-        UpdateDisplay();
-    }
-
-    private void Btn1_Click(object sender, EventArgs e)
-    {
-        display += "1";
-        UpdateDisplay();
-    }
-
-    private void Btn2_Click(object sender, EventArgs e)
-    {
-        display += "2";
-        UpdateDisplay();
-    }
-
-    private void Btn3_Click(object sender, EventArgs e)
-    {
-        display += "3";
-        UpdateDisplay();
-    }
-
-    private void Btn4_Click(object sender, EventArgs e)
-    {
-        display += "4";
-        UpdateDisplay();
-    }
-
-    private void Btn5_Click(object sender, EventArgs e)
-    {
-        display += "5";
-        UpdateDisplay();
-    }
-
-    private void Btn6_Click(object sender, EventArgs e)
-    {
-        display += "6";
-        UpdateDisplay();
-    }
-
-    private void Btn7_Click(object sender, EventArgs e)
-    {
-        display += "7";
-        UpdateDisplay();
-    }
-
-    private void Btn8_Click(object sender, EventArgs e)
-    {
-        display += "8";
-        UpdateDisplay();
-    }
-
-    private void Btn9_Click(object sender, EventArgs e)
-    {
-        display += "9";
-        UpdateDisplay();
-    }
-
     private void BtnDot_Click(object sender, EventArgs e)
     {
-        display += ".";
+        display = ValidDot(display);
         UpdateDisplay();
     }
 
     private void BtnLBracket_Click(object sender, EventArgs e)
     {
-        display += "(";
+        display = ValidLeftBrackets(display);
         UpdateDisplay();
     }
 
@@ -253,37 +324,6 @@ public partial class CalForm : Form
         display = ValidRightBrackets(display);
         UpdateDisplay();
     }
-
-    private void BtnPlus_Click(object sender, EventArgs e)
-    {
-        display += "+";
-        UpdateDisplay();
-    }
-
-    private void BtnMinus_Click(object sender, EventArgs e)
-    {
-        display += "-";
-        UpdateDisplay();
-    }
-
-    private void BtnTimes_Click(object sender, EventArgs e)
-    {
-        display += "*";
-        UpdateDisplay();
-    }
-
-    private void BtnDivide_Click(object sender, EventArgs e)
-    {
-        display += "/";
-        UpdateDisplay();
-    }
-
-    private void BtnExp_Click(object sender, EventArgs e)
-    {
-        display += "^";
-        UpdateDisplay();
-    }
-
 }
 /// <summary>
 /// 计算方法类

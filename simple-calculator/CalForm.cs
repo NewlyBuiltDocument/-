@@ -426,75 +426,26 @@ namespace simple_calculator
             UpdateDisplay();
         }
 
-        private void Btn0_Click(object sender, EventArgs e)
+        
+        private void BtnNum_Click(object sender, EventArgs e)
         {
-            display += "0";
-            UpdateDisplay();
-        }
-
-        private void Btn1_Click(object sender, EventArgs e)
-        {
-            display += "1";
-            UpdateDisplay();
-        }
-
-        private void Btn2_Click(object sender, EventArgs e)
-        {
-            display += "2";
-            UpdateDisplay();
-        }
-
-        private void Btn3_Click(object sender, EventArgs e)
-        {
-            display += "3";
-            UpdateDisplay();
-        }
-
-        private void Btn4_Click(object sender, EventArgs e)
-        {
-            display += "4";
-            UpdateDisplay();
-        }
-
-        private void Btn5_Click(object sender, EventArgs e)
-        {
-            display += "5";
-            UpdateDisplay();
-        }
-
-        private void Btn6_Click(object sender, EventArgs e)
-        {
-            display += "6";
-            UpdateDisplay();
-        }
-
-        private void Btn7_Click(object sender, EventArgs e)
-        {
-            display += "7";
-            UpdateDisplay();
-        }
-
-        private void Btn8_Click(object sender, EventArgs e)
-        {
-            display += "8";
-            UpdateDisplay();
-        }
-
-        private void Btn9_Click(object sender, EventArgs e)
-        {
-            display += "9";
-            UpdateDisplay();
+            if (sender is Button clickedButton)
+            {
+                string buttonText = clickedButton.Text;
+                display += buttonText;
+                UpdateDisplay();
+            }
         }
 
         private void BtnDot_Click(object sender, EventArgs e)
         {
-            display += ValidDot(display);
+            display = ValidDot(display);
             UpdateDisplay();
         }
 
         private void BtnLBracket_Click(object sender, EventArgs e)
         {
-            display += ValidLeftBrackets(display);
+            display = ValidLeftBrackets(display);
             UpdateDisplay();
         }
 
@@ -505,51 +456,35 @@ namespace simple_calculator
             UpdateDisplay();
         }
 
-        private void BtnPlus_Click(object sender, EventArgs e)
+        private void BtnOp_Click(object sender, EventArgs e)
         {
-            if (CanInsertOperator(display))
+            if (sender is Button clickedButton)
             {
-                display += "+";
-                UpdateDisplay();
+                if (CanInsertOperator(display))
+                {
+                    string buttonText = clickedButton.Text;
+                    switch (buttonText)
+                    {
+                        case "+":
+                            display += "+";
+                            break;
+                        case "-":
+                            display += "-";
+                            break;
+                        case "×":
+                            display += "*";
+                            break;
+                        case "÷":
+                            display += "/";
+                            break;
+                        case "^":
+                            display += "^";
+                            break;
+                    }
+                    UpdateDisplay();
+                }
             }
         }
-
-        private void BtnMinus_Click(object sender, EventArgs e)
-        {
-            if (CanInsertOperator(display))
-            {
-                display += "-";
-                UpdateDisplay();
-            }
-        }
-
-        private void BtnTimes_Click(object sender, EventArgs e)
-        {
-            if (CanInsertOperator(display))
-            {
-                display += "*";
-                UpdateDisplay();
-            }
-        }
-
-        private void BtnDivide_Click(object sender, EventArgs e)
-        {
-            if (CanInsertOperator(display))
-            {
-                display += "/";
-                UpdateDisplay();
-            }
-        }
-
-        private void BtnExp_Click(object sender, EventArgs e)
-        {
-            if (CanInsertOperator(display))
-            {
-                display += "^";
-                UpdateDisplay();
-            }
-        }
-
     }
     //字符串和IndexOfAny对应方法
     public static class StringExtend

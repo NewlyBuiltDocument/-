@@ -10,26 +10,26 @@ namespace simple_calculator
     {
         //显示字符串
         public string display = "";
-        
+
         public CalForm()
         {
             InitializeComponent();
             x = this.Width;
             y = this.Height;
-            setTag(this);
+            SetTag(this);
         }
 
         //region 控件大小随窗体大小等比例缩放
         private float x;//定义当前窗体的宽度
         private float y;//定义当前窗体的高度
-        private void setTag(Control cons)
+        private static void SetTag(Control cons)
         {
             foreach (Control con in cons.Controls)
             {
                 con.Tag = con.Width + ";" + con.Height + ";" + con.Left + ";" + con.Top + ";" + con.Font.Size;
                 if (con.Controls.Count > 0)
                 {
-                    setTag(con);
+                    SetTag(con);
                 }
             }
         }
@@ -41,13 +41,13 @@ namespace simple_calculator
                 //获取控件的Tag属性值，并分割后存储字符串数组
                 if (con.Tag != null)
                 {
-                    string[] mytag = con.Tag.ToString().Split(new char[] { ';' });
+                    string[] mytag = con.Tag.ToString().Split([';']);
                     //根据窗体缩放的比例确定控件的值
                     con.Width = Convert.ToInt32(System.Convert.ToSingle(mytag[0]) * newx);//宽度
                     con.Height = Convert.ToInt32(System.Convert.ToSingle(mytag[1]) * newy);//高度
                     con.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) * newx);//左边距
                     con.Top = Convert.ToInt32(System.Convert.ToSingle(mytag[3]) * newy);//顶边距
-                    Single currentSize = System.Convert.ToSingle(mytag[4]) * newy;//字体大小
+                    Single currentSize = System.Convert.ToSingle(mytag[4]) * newy;//字体大小                   
                     con.Font = new Font(con.Font.Name, currentSize, con.Font.Style, con.Font.Unit);
                     if (con.Controls.Count > 0)
                     {
@@ -244,6 +244,12 @@ namespace simple_calculator
             Sshu(ref b, ref c, 0, b.Length);
             return c[0];
         }
+
+        /// <summary>
+        /// 检测右括号输入时的合法性
+        /// </summary>
+        /// <param name="expression">输入后的字符串</param>
+        /// <returns></returns>
         public static string ValidRightBrackets(string expression)
         {
             string pattern = @"\(\)";
@@ -259,8 +265,11 @@ namespace simple_calculator
             }
             return expression;
         }
-        
 
+        public static string ValidDot(string expression)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// 按下等于时执行计算程序
@@ -280,7 +289,8 @@ namespace simple_calculator
             {
                 ans = Calculate(display).ToString();
             }
-            catch {
+            catch
+            {
                 MessageBox.Show("输入有误！");
                 return;
             }

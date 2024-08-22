@@ -55,5 +55,18 @@ namespace simple_calculator.Tests
             }
             catch {; }
         }
+
+        [TestMethod()]
+        [Timeout(2000)]
+        [DataRow("3.5+(2)", "3.5+(2)")]
+        [DataRow("3.5+2)", "3.5+2")]
+        [DataRow("3.5+()", "3.5+(")]
+        [DataRow("(3.5+(2))", "(3.5+(2))")]
+        [DataRow("(3.5+2))", "(3.5+2)")]
+        public void ValidRightBracketsTest(string expreesion, string expected)
+        {
+            string result = CalForm.ValidRightBrackets(expreesion);
+            Assert.AreEqual(expected, result);
+        }
     }
 }

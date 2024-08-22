@@ -1,4 +1,5 @@
 ﻿using System.Data.SQLite;
+using System.Text.RegularExpressions;
 
 namespace simple_calculator
 {
@@ -194,6 +195,22 @@ namespace simple_calculator
             Sshu(ref b, ref c, 0, b.Length);
             return c[0];
         }
+        public static string ValidRightBrackets(string expression)
+        {
+            string pattern = @"\(\)";
+            Match match1 = Regex.Match(expression, pattern);
+            if (match1.Success)
+            {
+                expression = Regex.Replace(expression, @"\)*", "");
+            }
+            if (Regex.Count(expression, @"\(") < Regex.Count(expression, @"\)"))
+            {
+                Match match2 = Regex.Match(expression, @"\)", RegexOptions.RightToLeft);
+                expression = expression.Remove(match2.Index, 1);
+            }
+            return expression;
+        }
+        
 
 
         /// <summary>
@@ -204,6 +221,11 @@ namespace simple_calculator
         /// <exception cref="NotImplementedException"></exception>
         private void BtnEqual_Click(object sender, EventArgs e)
         {
+            if (display.Length == 0)
+            {
+                MessageBox.Show("请输入表达式！");
+                return;
+            }
             string ans = "";
             try
             {
@@ -349,6 +371,7 @@ namespace simple_calculator
         private void BtnRBracket_Click(object sender, EventArgs e)
         {
             display += ")";
+            display = ValidRightBrackets(display);
             UpdateDisplay();
         }
 

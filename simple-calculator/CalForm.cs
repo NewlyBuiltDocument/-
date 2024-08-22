@@ -103,26 +103,22 @@ public partial class CalForm : Form
     /// <exception cref="NotImplementedException"></exception>
     private void BtnEqual_Click(object sender, EventArgs e)
     {
-        if (display.Length == 0)
+        if (display.Length != 0)//如果为空：没有输入或已经得到结果，应当什么也不做
         {
-            MessageBox.Show("请输入表达式！");
-            return;
+            try
+            {
+                string ans = AnyCalculate.Calculate(display).ToString();
+                display += "=";
+                display += ans;
+                UpdateDisplay();
+                AddToHistory(display);
+                display = "";//清空显示字符串，等待下一次输入
+            }
+            catch
+            {
+                MessageBox.Show("输入有误！");
+            }
         }
-        string ans = "";
-        try
-        {
-            ans = AnyCalculate.Calculate(display).ToString();
-        }
-        catch
-        {
-            MessageBox.Show("输入有误！");
-            return;
-        }
-        display += "=";
-        display += ans;
-        UpdateDisplay();
-        AddToHistory(display);
-        display = "";//清空显示字符串，等待下一次输入
     }
 
     /// <summary>

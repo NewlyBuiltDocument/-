@@ -248,7 +248,7 @@ namespace simple_calculator
         /// <summary>
         /// 检测右括号输入时的合法性
         /// </summary>
-        /// <param name="expression">输入后的字符串</param>
+        /// <param name="expression">输入右括号后的字符串</param>
         /// <returns></returns>
         public static string ValidRightBrackets(string expression)
         {
@@ -268,16 +268,23 @@ namespace simple_calculator
             return expression;
         }
 
+        /// <summary>
+        /// 检测小数点输入时的合法性，自动补齐前面的0
+        /// </summary>
+        /// <param name="expression">输入小数点前的字符串</param>
+        /// <returns></returns>
         public static string ValidDot(string expression)
         {
-            if (expression[expression.Length - 1] == '.')
+            if (expression[^1] == '.')
             {
                 return expression;
             }
+            //如果最后一个字符是运算符，补全0
             else if (Regex.Match(expression, @"[+\-\*/^(]$", RegexOptions.Compiled).Success)
             {
                 return expression + "0.";
             }
+            //如果最后一串数字中已经有小数点，不再添加
             else if (Regex.Match(expression, @"\.[0-9]+?$", RegexOptions.Compiled).Success)
             {
                 return expression;
@@ -286,6 +293,33 @@ namespace simple_calculator
             {
                 return expression + ".";
             }
+        }
+
+        /// <summary>
+        /// 检测左括号输入时的合法性，自动补全乘号
+        /// </summary>
+        /// <param name="expression">输入左括号前的字符串</param>
+        /// <returns></returns>
+        public static string ValidLeftBrackets(string expression)
+        {
+            if (expression.Length == 0)
+            {
+                return "(";
+            }
+            else if (expression[^1] == '.')
+            {
+                return expression;
+            }
+            //如果最后一个字符是数字，补全乘号
+            else if (Regex.Match(expression, @"[0-9]$", RegexOptions.Compiled).Success)
+            {
+                return expression + "*(";
+            }
+            else
+            {
+                return expression + "(";
+            }
+            
         }
 
         /// <summary>
@@ -434,13 +468,13 @@ namespace simple_calculator
 
         private void BtnDot_Click(object sender, EventArgs e)
         {
-            display += ".";
+            display += ValidDot(display);
             UpdateDisplay();
         }
 
         private void BtnLBracket_Click(object sender, EventArgs e)
         {
-            display += "(";
+            display += ValidLeftBrackets(display);
             UpdateDisplay();
         }
 

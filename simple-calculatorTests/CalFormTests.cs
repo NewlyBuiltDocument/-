@@ -89,5 +89,17 @@ namespace simple_calculator.Tests
             string result = CalForm.ValidDot(expression);
             Assert.AreEqual(expected, result);
         }
+
+        [TestMethod()]
+        [Timeout(2000)]
+        [DataRow("", "(")]
+        [DataRow("13.", "13.")]
+        [DataRow("13.5", "13.5*(")]
+        [DataRow("13.5+", "13.5+(")]
+        public void ValidLeftBracketTest(string expression, string expected)
+        {
+            string result = CalForm.ValidLeftBrackets(expression);
+            Assert.AreEqual(expected, result);
+        }
     }
 }

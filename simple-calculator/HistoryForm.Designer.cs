@@ -58,7 +58,6 @@
             // 
             // BtnDel
             // 
-            BtnDel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             BtnDel.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point, 134);
             BtnDel.Location = new Point(72, 596);
             BtnDel.Margin = new Padding(4);

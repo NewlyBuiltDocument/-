@@ -249,7 +249,7 @@ namespace simple_calculator
         /// 检测右括号输入时的合法性
         /// </summary>
         /// <param name="expression">输入右括号后的字符串</param>
-        /// <returns></returns>
+        /// <returns>修改后的字符串</returns>
         public static string ValidRightBrackets(string expression)
         {
             //如果左括号数量小于右括号数量，删除右括号
@@ -272,7 +272,7 @@ namespace simple_calculator
         /// 检测小数点输入时的合法性，自动补齐前面的0
         /// </summary>
         /// <param name="expression">输入小数点前的字符串</param>
-        /// <returns></returns>
+        /// <returns>输入后的字符串</returns>
         public static string ValidDot(string expression)
         {
             if (expression[^1] == '.')
@@ -299,7 +299,7 @@ namespace simple_calculator
         /// 检测左括号输入时的合法性，自动补全乘号
         /// </summary>
         /// <param name="expression">输入左括号前的字符串</param>
-        /// <returns></returns>
+        /// <returns>输入后的字符串</returns>
         public static string ValidLeftBrackets(string expression)
         {
             if (expression.Length == 0)
@@ -323,11 +323,31 @@ namespace simple_calculator
         }
 
         /// <summary>
+        /// 检测是否可以插入运算符
+        /// </summary>
+        /// <param name="expression">插入运算符前的字符串</param>
+        /// <returns>是否可以插入</returns>
+        public static bool CanInsertOperator(string expression)
+        {
+            if (expression.Length == 0)
+            {
+                return false;
+            }
+            else if (Regex.Match(expression, @"[+\-\*/^(]$", RegexOptions.Compiled).Success)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
         /// 按下等于时执行计算程序
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /// <exception cref="NotImplementedException"></exception>
         private void BtnEqual_Click(object sender, EventArgs e)
         {
             if (display.Length == 0)
@@ -487,32 +507,47 @@ namespace simple_calculator
 
         private void BtnPlus_Click(object sender, EventArgs e)
         {
-            display += "+";
-            UpdateDisplay();
+            if (CanInsertOperator(display))
+            {
+                display += "+";
+                UpdateDisplay();
+            }
         }
 
         private void BtnMinus_Click(object sender, EventArgs e)
         {
-            display += "-";
-            UpdateDisplay();
+            if (CanInsertOperator(display))
+            {
+                display += "-";
+                UpdateDisplay();
+            }
         }
 
         private void BtnTimes_Click(object sender, EventArgs e)
         {
-            display += "*";
-            UpdateDisplay();
+            if (CanInsertOperator(display))
+            {
+                display += "*";
+                UpdateDisplay();
+            }
         }
 
         private void BtnDivide_Click(object sender, EventArgs e)
         {
-            display += "/";
-            UpdateDisplay();
+            if (CanInsertOperator(display))
+            {
+                display += "/";
+                UpdateDisplay();
+            }
         }
 
         private void BtnExp_Click(object sender, EventArgs e)
         {
-            display += "^";
-            UpdateDisplay();
+            if (CanInsertOperator(display))
+            {
+                display += "^";
+                UpdateDisplay();
+            }
         }
 
     }

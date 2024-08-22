@@ -101,5 +101,22 @@ namespace simple_calculator.Tests
             string result = CalForm.ValidLeftBrackets(expression);
             Assert.AreEqual(expected, result);
         }
+
+        [TestMethod()]
+        [Timeout(2000)]
+        [DataRow("1+2", true)]
+        [DataRow("", false)]
+        [DataRow("1+", false)]
+        [DataRow("1+2+", false)]
+        [DataRow("1+2-", false)]
+        [DataRow("1+2*", false)]
+        [DataRow("1+2/", false)]
+        [DataRow("1+2^", false)]
+        [DataRow("1+2(", false)]
+        public void CanInsertOperatorTest(string expression, bool expected)
+        {
+            bool result = CalForm.CanInsertOperator(expression);
+            Assert.AreEqual(expected, result);
+        }
     }
 }

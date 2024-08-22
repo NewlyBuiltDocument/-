@@ -423,7 +423,7 @@ public static class AnyCalculate
                 f = a.LastIndexNotOfAny(de, e, e - c + 1);
                 if (f != -1)
                     f += a[f] == ' ' ? 2 : 1;
-                else f = 0;
+                else f = c;
                 b[a.Count(0, e)] *= (a.Count(f, e - f + 1, '-') % 2 != 0 ? -1 : 1);
                 a = a.Remove(f, e - f + 1);
                 d -= e - f + 1;

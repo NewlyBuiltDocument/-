@@ -418,6 +418,8 @@ public static class AnyCalculate
             }
             else
             {
+                if (e != 0 && a[e - 1] == ' ')
+                    continue;
                 f = a.LastIndexNotOfAny(de, e, e - c + 1);
                 if (f != -1)
                     f += a[f] == ' ' ? 2 : 1;

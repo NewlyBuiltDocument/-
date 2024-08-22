@@ -63,9 +63,30 @@ namespace simple_calculator.Tests
         [DataRow("3.5+()", "3.5+(")]
         [DataRow("(3.5+(2))", "(3.5+(2))")]
         [DataRow("(3.5+2))", "(3.5+2)")]
-        public void ValidRightBracketsTest(string expreesion, string expected)
+        [DataRow("(3.5+)", "(3.5+")]
+        [DataRow("(3.5-)", "(3.5-")]
+        [DataRow("(3.5*)", "(3.5*")]
+        [DataRow("(3.5/)", "(3.5/")]
+        [DataRow("(3.5^)", "(3.5^")]
+        public void ValidRightBracketsTest(string expression, string expected)
         {
-            string result = CalForm.ValidRightBrackets(expreesion);
+            string result = CalForm.ValidRightBrackets(expression);
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod()]
+        [Timeout(2000)]
+        [DataRow("1+32344", "1+32344.")]
+        [DataRow("1+3.", "1+3.")]
+        [DataRow("1+", "1+0.")]
+        [DataRow("1-", "1-0.")]
+        [DataRow("1*", "1*0.")]
+        [DataRow("1/", "1/0.")]
+        [DataRow("1^", "1^0.")]
+        [DataRow("1+341233.55433", "1+341233.55433")]
+        public void ValidDotTest(string expression, string expected)
+        {
+            string result = CalForm.ValidDot(expression);
             Assert.AreEqual(expected, result);
         }
     }

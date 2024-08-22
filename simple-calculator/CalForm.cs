@@ -252,15 +252,17 @@ namespace simple_calculator
         /// <returns></returns>
         public static string ValidRightBrackets(string expression)
         {
-            string pattern = @"\(\)";
-            Match match1 = Regex.Match(expression, pattern);
-            if (match1.Success)
+            //如果左括号数量小于右括号数量，删除右括号
+            if (Regex.Count(expression, @"\(", RegexOptions.Compiled) < Regex.Count(expression, @"\)", RegexOptions.Compiled))
             {
-                expression = Regex.Replace(expression, @"\)*", "");
+                Match match2 = Regex.Match(expression, @"\)", RegexOptions.RightToLeft | RegexOptions.Compiled);
+                expression = expression.Remove(match2.Index, 1);
+                return expression;
             }
-            if (Regex.Count(expression, @"\(") < Regex.Count(expression, @"\)"))
+            //如果右括号前面是运算符或左括号，删除右括号
+            if (Regex.Match(expression, @"[+\-\*/^(]\)", RegexOptions.Compiled).Success)
             {
-                Match match2 = Regex.Match(expression, @"\)", RegexOptions.RightToLeft);
+                Match match2 = Regex.Match(expression, @"\)", RegexOptions.RightToLeft | RegexOptions.Compiled);
                 expression = expression.Remove(match2.Index, 1);
             }
             return expression;
@@ -268,7 +270,22 @@ namespace simple_calculator
 
         public static string ValidDot(string expression)
         {
-            throw new NotImplementedException();
+            if (expression[expression.Length - 1] == '.')
+            {
+                return expression;
+            }
+            else if (Regex.Match(expression, @"[+\-\*/^(]$", RegexOptions.Compiled).Success)
+            {
+                return expression + "0.";
+            }
+            else if (Regex.Match(expression, @"\.[0-9]+?$", RegexOptions.Compiled).Success)
+            {
+                return expression;
+            }
+            else
+            {
+                return expression + ".";
+            }
         }
 
         /// <summary>

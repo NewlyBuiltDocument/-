@@ -155,7 +155,21 @@ public partial class CalForm : Form
         }
         
     }
-
+    /// <summary>
+    /// 为不匹配的左括号补全右括号
+    /// </summary>
+    /// <returns>原字符串需要补右括号返回true，不需要则返回false</returns>
+    private bool CompleteRightBrackets()
+    {
+        bool condition = false;
+        int difference = display.Count(x => x == '(') - display.Count(x => x == ')');
+        if (difference > 0)
+        {
+            display = display.PadRight(display.Length + difference, ')');
+            condition = true;
+        }
+        return condition;
+    }
     /// <summary>
     /// 检测是否可以插入运算符
     /// </summary>
@@ -238,6 +252,7 @@ public partial class CalForm : Form
         {
             try
             {
+                CompleteRightBrackets();
                 string ans = AnyCalculate.Calculate(display).ToString();
                 display += "=";
                 display += ans;

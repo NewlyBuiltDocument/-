@@ -1,483 +1,485 @@
 ﻿using System.Data.SQLite;
 using System.Text.RegularExpressions;
 
-namespace simple_calculator
-{
-    /// <summary>
-    /// 窗体类，需为第一个类以便设计器渲染
-    /// </summary>
-    public partial class CalForm : Form
-    {
-        //显示字符串
-        public string display = "";
-        
-        public CalForm()
-        {
-            InitializeComponent();
-            x = this.Width;
-            y = this.Height;
-            setTag(this);
-        }
+namespace simple_calculator;
 
-        //region 控件大小随窗体大小等比例缩放
-        private float x;//定义当前窗体的宽度
-        private float y;//定义当前窗体的高度
-        private void setTag(Control cons)
+/// <summary>
+/// 窗体类，需为第一个类以便设计器渲染
+/// </summary>
+public partial class CalForm : Form
+{
+    //显示字符串
+    public string display = "";
+    
+    public CalForm()
+    {
+        InitializeComponent();
+        x = this.Width;
+        y = this.Height;
+        setTag(this);
+    }
+
+    //region 控件大小随窗体大小等比例缩放
+    private float x;//定义当前窗体的宽度
+    private float y;//定义当前窗体的高度
+    private void setTag(Control cons)
+    {
+        foreach (Control con in cons.Controls)
         {
-            foreach (Control con in cons.Controls)
+            con.Tag = con.Width + ";" + con.Height + ";" + con.Left + ";" + con.Top + ";" + con.Font.Size;
+            if (con.Controls.Count > 0)
             {
-                con.Tag = con.Width + ";" + con.Height + ";" + con.Left + ";" + con.Top + ";" + con.Font.Size;
+                setTag(con);
+            }
+        }
+    }
+    private void setControls(float newx, float newy, Control cons)
+    {
+        //遍历窗体中的控件，重新设置控件的值
+        foreach (Control con in cons.Controls)
+        {
+            //获取控件的Tag属性值，并分割后存储字符串数组
+            if (con.Tag != null)
+            {
+                string[] mytag = con.Tag.ToString().Split(new char[] { ';' });
+                //根据窗体缩放的比例确定控件的值
+                con.Width = Convert.ToInt32(System.Convert.ToSingle(mytag[0]) * newx);//宽度
+                con.Height = Convert.ToInt32(System.Convert.ToSingle(mytag[1]) * newy);//高度
+                con.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) * newx);//左边距
+                con.Top = Convert.ToInt32(System.Convert.ToSingle(mytag[3]) * newy);//顶边距
+                Single currentSize = System.Convert.ToSingle(mytag[4]) * newy;//字体大小
+                con.Font = new Font(con.Font.Name, currentSize, con.Font.Style, con.Font.Unit);
                 if (con.Controls.Count > 0)
                 {
-                    setTag(con);
+                    setControls(newx, newy, con);
                 }
             }
         }
-        private void setControls(float newx, float newy, Control cons)
-        {
-            //遍历窗体中的控件，重新设置控件的值
-            foreach (Control con in cons.Controls)
-            {
-                //获取控件的Tag属性值，并分割后存储字符串数组
-                if (con.Tag != null)
-                {
-                    string[] mytag = con.Tag.ToString().Split(new char[] { ';' });
-                    //根据窗体缩放的比例确定控件的值
-                    con.Width = Convert.ToInt32(System.Convert.ToSingle(mytag[0]) * newx);//宽度
-                    con.Height = Convert.ToInt32(System.Convert.ToSingle(mytag[1]) * newy);//高度
-                    con.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) * newx);//左边距
-                    con.Top = Convert.ToInt32(System.Convert.ToSingle(mytag[3]) * newy);//顶边距
-                    Single currentSize = System.Convert.ToSingle(mytag[4]) * newy;//字体大小
-                    con.Font = new Font(con.Font.Name, currentSize, con.Font.Style, con.Font.Unit);
-                    if (con.Controls.Count > 0)
-                    {
-                        setControls(newx, newy, con);
-                    }
-                }
-            }
-        }
-        private void CalForm_Resize(object sender, EventArgs e)
-        {
-            float newx = (this.Width) / x;
-            float newy = (this.Height) / y;
-            setControls(newx, newy, this);
-        }
+    }
+    private void CalForm_Resize(object sender, EventArgs e)
+    {
+        float newx = (this.Width) / x;
+        float newy = (this.Height) / y;
+        setControls(newx, newy, this);
+    }
 
-        //endregion
+    //endregion
 
-        private void CalForm_Load(object sender, EventArgs e)
+    private void CalForm_Load(object sender, EventArgs e)
+    {
+        UpdateDisplay();
+    }
+
+    /// <summary>
+    /// 更新显示的内容
+    /// </summary>
+    private void UpdateDisplay()
+    {
+        DisplayText.Text = display;
+    }
+    public static string ValidRightBrackets(string expression)
+    {
+        string pattern = @"\(\)";
+        Match match1 = Regex.Match(expression, pattern);
+        if (match1.Success)
         {
+            expression = Regex.Replace(expression, @"\)*", "");
+        }
+        if (Regex.Count(expression, @"\(") < Regex.Count(expression, @"\)"))
+        {
+            Match match2 = Regex.Match(expression, @"\)", RegexOptions.RightToLeft);
+            expression = expression.Remove(match2.Index, 1);
+        }
+        return expression;
+    }
+    
+
+
+    /// <summary>
+    /// 按下等于时执行计算程序
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    /// <exception cref="NotImplementedException"></exception>
+    private void BtnEqual_Click(object sender, EventArgs e)
+    {
+        if (display.Length == 0)
+        {
+            MessageBox.Show("请输入表达式！");
+            return;
+        }
+        string ans = "";
+        try
+        {
+            ans = AnyCalculate.Calculate(display).ToString();
+        }
+        catch
+        {
+            MessageBox.Show("输入有误！");
+            return;
+        }
+        display += "=";
+        display += ans;
+        UpdateDisplay();
+        AddToHistory(display);
+        display = "";//清空显示字符串，等待下一次输入
+    }
+
+    /// <summary>
+    /// 将计算结果添加到历史记录
+    /// </summary>
+    /// <param name="result">上一次结果的字符串</param>
+    private static void AddToHistory(string result)
+    {
+        using SQLiteConnection conn = new(Program.myConnectionString);
+        conn.Open();
+        SQLiteCommand cmd = new();
+        string insertStr = $"INSERT INTO history (results) VALUES ('{result}');";
+        cmd = new SQLiteCommand(insertStr, conn);
+        try { cmd.ExecuteNonQuery(); }
+        catch (SQLiteException)
+        {
+            MessageBox.Show("无法添加到历史！");
+        }
+    }
+
+    /// <summary>
+    /// 显示历史记录
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void BtnHistory_Click(object sender, EventArgs e)
+    {
+        HistoryForm historyForm = new();
+        historyForm.ShowDialog();
+    }
+
+    /// <summary>
+    /// 删除最后一个字符
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void BtnDel_Click(object sender, EventArgs e)
+    {
+        if (display.Length > 0)
+        {
+            display = display.Remove(display.Length - 1);
             UpdateDisplay();
         }
+    }
 
-        /// <summary>
-        /// 更新显示的内容
-        /// </summary>
-        private void UpdateDisplay()
-        {
-            DisplayText.Text = display;
-        }
-        //字符计数
-        private static int Chshu(ReadOnlySpan<char> a, char b = ' ')
-        {
-            int c = 0;
-            foreach (char d in a)
-            {
-                if (d == b) { ++c; }
-            }
-            return c;
-        }
-        private static int Chshu(ref string a, int b, int c, char d = ' ')
-        {
-            return Chshu(a.AsSpan(b, c), d);
-        }
-        //字符串转数字
-        private static double Svtoty(ref string a, int b = 0, int Base = 10)
-        {
-            double d = 0.0, e = Base;
-            int? f = null, g = a.Length;
-            for (; b < g && (a[b] >= '0' && a[b] <= '9' || a[b] == '.'); ++b)
-            {
-                if (f != null)
-                {
-                    ++f;
-                }
-                if (a[b] == '.')
-                {
-                    f = 0;
-                }
-                else
-                {
-                    d *= e;
-                    d += a[b] - '0';
-                }
-            }
-            if (f != null)
-            {
-                d /= Math.Pow(e, (double)f);
-            }
-            return d;
-        }
+    /// <summary>
+    /// 清空输入
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void BtnClear_Click(object sender, EventArgs e)
+    {
+        display = "";
+        UpdateDisplay();
+    }
 
-        //数与符号分离
-        private static List<double> Zhuan(ref string str)
+    private void Btn0_Click(object sender, EventArgs e)
+    {
+        display += "0";
+        UpdateDisplay();
+    }
+
+    private void Btn1_Click(object sender, EventArgs e)
+    {
+        display += "1";
+        UpdateDisplay();
+    }
+
+    private void Btn2_Click(object sender, EventArgs e)
+    {
+        display += "2";
+        UpdateDisplay();
+    }
+
+    private void Btn3_Click(object sender, EventArgs e)
+    {
+        display += "3";
+        UpdateDisplay();
+    }
+
+    private void Btn4_Click(object sender, EventArgs e)
+    {
+        display += "4";
+        UpdateDisplay();
+    }
+
+    private void Btn5_Click(object sender, EventArgs e)
+    {
+        display += "5";
+        UpdateDisplay();
+    }
+
+    private void Btn6_Click(object sender, EventArgs e)
+    {
+        display += "6";
+        UpdateDisplay();
+    }
+
+    private void Btn7_Click(object sender, EventArgs e)
+    {
+        display += "7";
+        UpdateDisplay();
+    }
+
+    private void Btn8_Click(object sender, EventArgs e)
+    {
+        display += "8";
+        UpdateDisplay();
+    }
+
+    private void Btn9_Click(object sender, EventArgs e)
+    {
+        display += "9";
+        UpdateDisplay();
+    }
+
+    private void BtnDot_Click(object sender, EventArgs e)
+    {
+        display += ".";
+        UpdateDisplay();
+    }
+
+    private void BtnLBracket_Click(object sender, EventArgs e)
+    {
+        display += "(";
+        UpdateDisplay();
+    }
+
+    private void BtnRBracket_Click(object sender, EventArgs e)
+    {
+        display += ")";
+        display = ValidRightBrackets(display);
+        UpdateDisplay();
+    }
+
+    private void BtnPlus_Click(object sender, EventArgs e)
+    {
+        display += "+";
+        UpdateDisplay();
+    }
+
+    private void BtnMinus_Click(object sender, EventArgs e)
+    {
+        display += "-";
+        UpdateDisplay();
+    }
+
+    private void BtnTimes_Click(object sender, EventArgs e)
+    {
+        display += "*";
+        UpdateDisplay();
+    }
+
+    private void BtnDivide_Click(object sender, EventArgs e)
+    {
+        display += "/";
+        UpdateDisplay();
+    }
+
+    private void BtnExp_Click(object sender, EventArgs e)
+    {
+        display += "^";
+        UpdateDisplay();
+    }
+
+}
+//计算方法
+public static class AnyCalculate
+{
+    public static int IndexNotOfAny(this string str, char[] anyOf, int startIndex)
+    {
+        for (int a = startIndex; a < str.Length; ++a)
         {
-            List<double> a = [];
-            str = str.Replace(" ", null);
-            char[] c = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
-            for (int d = str.IndexOfAny(c), e = (d == -1 ? 0 : str.IndexNotOfAny(c, d)); d != -1;)
+            char b = str[a];
+            bool c = true;
+            foreach (char d in anyOf)
             {
-                a.Add(Svtoty(ref str, d));
-                str = string.Concat(str.AsSpan(0, d), " ", e == -1 ? null : str.AsSpan(e));
-                d = str.IndexOfAny(c);
-                e = (d == -1 ? 0 : str.IndexNotOfAny(c, d));
+                if (b == d)
+                {
+                    c = false;
+                    break;
+                }
             }
-            return a;
+            if (c) return a;
         }
-        //无括号部分计算
-        private static void Sshu(ref string a, ref List<double> b, int c, int d)
+        return -1;
+    }
+    public static int LastIndexNotOfAny(this string str, char[] anyOf, int startIndex)
+    {
+        for (int a = startIndex; a > -1; --a)
         {
-            char[] de = ['+', '-'], df = ['*', '/'], dg = ['^'];
-            for (int e = a.IndexOfAny(dg, c), f; e != -1 && e < d; a = a.Remove(e, 2), d -= 2, b.RemoveAt(f), e = a.IndexOfAny(df, e))
+            char b = str[a];
+            bool c = true;
+            foreach (char d in anyOf)
             {
-                f = Chshu(ref a, 0, e);
+                if (b == d)
+                {
+                    c = false;
+                    break;
+                }
+            }
+            if (c) return a;
+        }
+        return -1;
+    }
+    public static int LastIndexNotOfAny(this string str, char[] anyOf, int startIndex, int count)
+    {
+        for (int a = startIndex; a > startIndex - count; --a) 
+        {
+            char b = str[a];
+            bool c = true;
+            foreach (char d in anyOf)
+            {
+                if (b == d)
+                {
+                    c = false;
+                    break;
+                }
+            }
+            if (c) return a;
+        }
+        return -1;
+    }
+    //字符计数
+    public static int Count(this string str, int Startindex, int count, char value = ' ')
+    {
+        return str.AsSpan(Startindex, count).Count(value);
+    }
+    //字符串转数字
+    private static double Svtoty(ref string a, int b = 0, int Base = 10)
+    {
+        double d = 0.0, e = Base;
+        int? f = null, g = a.Length;
+        for (; b < g && (a[b] >= '0' && a[b] <= '9' || a[b] == '.'); ++b)
+        {
+            if (f != null) ++f;
+            if (a[b] == '.') f = 0;
+            else
+            {
+                d *= e;
+                d += a[b] - '0';
+            }
+        }
+        if (f != null)
+            d /= Math.Pow(e, (double)f);
+        return d;
+    }
+
+    //数与符号分离
+    private static List<double> Zhuan(ref string str)
+    {
+        List<double> a = [];
+        str = str.Replace(" ", null);
+        char[] c = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
+        for (int d = str.IndexOfAny(c), e; d != -1;)
+        {
+            e = str.IndexNotOfAny(c, d);
+            a.Add(Svtoty(ref str, d));
+            str = string.Concat(str.AsSpan(0, d), " ", e == -1 ? null : str.AsSpan(e));
+            d = str.IndexOfAny(c);
+        }
+        return a;
+    }
+    //无括号部分计算
+    private static void Sshu(ref string a, ref List<double> b, int c, int d)
+    {
+        char[] de = ['+', '-'], df = ['*', '/'], dh = ['+', '-', '^'];
+        for (int e = a.LastIndexOfAny(dh, d - 1, d - c), f; e != -1 && e >= c; e = a.LastIndexOfAny(dh, e - 1, e - c))
+        {
+            if (a[e] == '^')
+            {
+                f = a.Count(0, e);
                 b[f - 1] = Math.Pow(b[f - 1], b[f]);
+                a = a.Remove(e, 2);
+                d -= 2;
+                b.RemoveAt(f);
             }
-            for (int e = a.IndexOfAny(de, c), f = (e == -1 ? 0 : a.IndexNotOfAny(de, e)); e != -1 && e < d;)
+            else
             {
-                if (e != 0 && a[e - 1] == ' ')
-                {
-                    ++e; continue;
-                }
-                if (f >= d) break;
-                b[Chshu(ref a, 0, e)] *= (Chshu(ref a, e, f - e, '-') % 2 != 0 ? -1 : 1);
-                a = a.Remove(e, f - e);
-                d -= f - e;
-                e = a.IndexOfAny(de, e);
-                f = e == -1 ? 0 : a.IndexNotOfAny(de, e);
-            }
-            for (int e = a.IndexOfAny(df, c), f; e != -1 && e < d; a = a.Remove(e, 2), d -= 2, b.RemoveAt(f), e = a.IndexOfAny(df, e))
-            {
-                f = Chshu(ref a, 0, e);
-                if (a[e] == '*')
-                {
-                    b[f - 1] *= b[f];
-                }
-                else
-                {
-                    b[f - 1] /= b[f];
-                }
-            }
-            for (int e = a.IndexOfAny(de, c), f; e != -1 && e < d; a = a.Remove(e, 2), d -= 2, b.RemoveAt(f), e = a.IndexOfAny(de, e))
-            {
-                f = Chshu(ref a, 0, e);
-                if (a[e] == '+')
-                {
-                    b[f - 1] += b[f];
-                }
-                else
-                {
-                    b[f - 1] -= b[f];
-                }
+                f = a.LastIndexNotOfAny(de, e, e - c + 1);
+                if (f != -1)
+                    f += a[f] == ' ' ? 2 : 1;
+                else f = 0;
+                b[a.Count(0, e)] *= (a.Count(f, e - f + 1, '-') % 2 != 0 ? -1 : 1);
+                a = a.Remove(f, e - f + 1);
+                d -= e - f + 1;
+                e = f + 1;
             }
         }
-        //核心计算，对括号处理
-        public static double Calculate(string expression)
+        for (int e = a.IndexOfAny(df, c), f; e != -1 && e < d; a = a.Remove(e, 2), d -= 2, b.RemoveAt(f), e = a.IndexOfAny(df, e))
         {
-            string b = expression;
-            List<double> c = Zhuan(ref b);
-            for (int d = b.IndexOf(')'), e, f; d != -1; d = b.IndexOf(')', e))//有括号时对括号的处理
+            f = a.Count(0, e);
+            if (a[e] == '*') b[f - 1] *= b[f];
+            else b[f - 1] /= b[f];
+        }
+        for (int e = a.IndexOfAny(de, c), f; e != -1 && e < d; a = a.Remove(e, 2), d -= 2, b.RemoveAt(f), e = a.IndexOfAny(de, e))
+        {
+            f = a.Count(0, e);
+            if (a[e] == '+') b[f - 1] += b[f];
+            else b[f - 1] -= b[f];
+        }
+    }
+    //核心计算，对括号处理
+    public static double Calculate(string expression)
+    {
+        List<double> c = Zhuan(ref expression);
+        for (int d = expression.IndexOf(')'), e, f; d != -1; d = expression.IndexOf(')', e))//有括号时对括号的处理
+        {
+            e = expression.LastIndexOf('(', d);
+            f = expression.Count(0, d);
+            if (e != -1)
             {
-                e = b.LastIndexOf('(', d);
-                f = Chshu(ref b, 0, d);
-                if (e != -1)
+                Sshu(ref expression, ref c, e + 1, d);
+                expression = expression.Remove(e, 1).Remove(e + 1, 1);
+                f = expression.Count(0, e);
+                if (expression.Length > e + 1 && expression[e + 1] == ' ')
                 {
-                    Sshu(ref b, ref c, e + 1, d);
-                    b = b.Remove(e, 1).Remove(e + 1, 1);
-                    f = Chshu(ref b, 0, e);
-                    if (b.Length > e + 1 && b[e + 1] == ' ')
-                    {
-                        c[f] *= c[f + 1];
-                        b = b.Remove(e, 1);
-                        c.RemoveAt(f + 1);
-                    }
-                    if (e != 0 && b[e - 1] == ' ')
+                    c[f] *= c[f + 1];
+                    expression = expression.Remove(e, 1);
+                    c.RemoveAt(f + 1);
+                }
+                if (e != 0 && expression[e - 1] == ' ')
+                {
+                    c[f - 1] *= c[f];
+                    expression = expression.Remove(e, 1);
+                    c.RemoveAt(f);
+                }
+            }
+            else
+            {
+                if (d != 0)
+                {
+                    if (expression[d - 1] == ' ' && expression[d + 1] == ' ')
                     {
                         c[f - 1] *= c[f];
-                        b = b.Remove(e, 1);
+                        expression = expression.Remove(d, 2);
                         c.RemoveAt(f);
                     }
                 }
-                else
-                {
-                    if (d != 0)
-                    {
-                        if (b[d - 1] == ' ' && b[d + 1] == ' ')
-                        {
-                            c[f - 1] *= c[f];
-                            b = b.Remove(d, 2);
-                            c.RemoveAt(f);
-                        }
-                    }
-                    else b = b.Remove(0, 1);
-                    e = 0;
-                }
+                else expression = expression.Remove(0, 1);
+                e = 0;
             }
-            if (b.Contains('('))
+        }
+        while (expression.Contains('('))
+            expression = expression.Remove(expression.IndexOf('('), 1);
+        for (int d = expression.IndexOf('('), e; d != -1;)
+        {
+            if (d != 0 && expression.Length >= d && expression[d - 1] == ' ' && expression[d] == ' ')
             {
-                b = b.Remove(b.IndexOf('('), 1);
+                e = expression.Count(0, d);
+                c[e - 1] *= c[e];
+                c.RemoveAt(e);
             }
-            for (int d = b.IndexOf('('), e; d != -1;)
-            {
-                if (d != 0 && b.Length >= d && b[d - 1] == ' ' && b[d] == ' ')
-                {
-                    e = Chshu(ref b, 0, d);
-                    c[e - 1] *= c[e];
-                    c.RemoveAt(e);
-                }
-                d = b.IndexOf('(');
-                if (d != -1)
-                {
-                    b = b.Remove(d, 1);
-                }
-            }
-            Sshu(ref b, ref c, 0, b.Length);
-            return c[0];
+            d = expression.IndexOf('(');
+            if (d != -1) expression = expression.Remove(d, 1);
         }
-        public static string ValidRightBrackets(string expression)
-        {
-            string pattern = @"\(\)";
-            Match match1 = Regex.Match(expression, pattern);
-            if (match1.Success)
-            {
-                expression = Regex.Replace(expression, @"\)*", "");
-            }
-            if (Regex.Count(expression, @"\(") < Regex.Count(expression, @"\)"))
-            {
-                Match match2 = Regex.Match(expression, @"\)", RegexOptions.RightToLeft);
-                expression = expression.Remove(match2.Index, 1);
-            }
-            return expression;
-        }
-        
-
-
-        /// <summary>
-        /// 按下等于时执行计算程序
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        private void BtnEqual_Click(object sender, EventArgs e)
-        {
-            if (display.Length == 0)
-            {
-                MessageBox.Show("请输入表达式！");
-                return;
-            }
-            string ans = "";
-            try
-            {
-                ans = Calculate(display).ToString();
-            }
-            catch {
-                MessageBox.Show("输入有误！");
-                return;
-            }
-            display += "=";
-            display += ans;
-            UpdateDisplay();
-            AddToHistory(display);
-            display = "";//清空显示字符串，等待下一次输入
-        }
-
-        /// <summary>
-        /// 将计算结果添加到历史记录
-        /// </summary>
-        /// <param name="result">上一次结果的字符串</param>
-        private static void AddToHistory(string result)
-        {
-            using SQLiteConnection conn = new(Program.myConnectionString);
-            conn.Open();
-            SQLiteCommand cmd = new();
-            string insertStr = $"INSERT INTO history (results) VALUES ('{result}');";
-            cmd = new SQLiteCommand(insertStr, conn);
-            try { cmd.ExecuteNonQuery(); }
-            catch (SQLiteException)
-            {
-                MessageBox.Show("无法添加到历史！");
-            }
-        }
-
-        /// <summary>
-        /// 显示历史记录
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BtnHistory_Click(object sender, EventArgs e)
-        {
-            HistoryForm historyForm = new();
-            historyForm.ShowDialog();
-        }
-
-        /// <summary>
-        /// 删除最后一个字符
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BtnDel_Click(object sender, EventArgs e)
-        {
-            if (display.Length > 0)
-            {
-                display = display.Remove(display.Length - 1);
-                UpdateDisplay();
-            }
-        }
-
-        /// <summary>
-        /// 清空输入
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BtnClear_Click(object sender, EventArgs e)
-        {
-            display = "";
-            UpdateDisplay();
-        }
-
-        private void Btn0_Click(object sender, EventArgs e)
-        {
-            display += "0";
-            UpdateDisplay();
-        }
-
-        private void Btn1_Click(object sender, EventArgs e)
-        {
-            display += "1";
-            UpdateDisplay();
-        }
-
-        private void Btn2_Click(object sender, EventArgs e)
-        {
-            display += "2";
-            UpdateDisplay();
-        }
-
-        private void Btn3_Click(object sender, EventArgs e)
-        {
-            display += "3";
-            UpdateDisplay();
-        }
-
-        private void Btn4_Click(object sender, EventArgs e)
-        {
-            display += "4";
-            UpdateDisplay();
-        }
-
-        private void Btn5_Click(object sender, EventArgs e)
-        {
-            display += "5";
-            UpdateDisplay();
-        }
-
-        private void Btn6_Click(object sender, EventArgs e)
-        {
-            display += "6";
-            UpdateDisplay();
-        }
-
-        private void Btn7_Click(object sender, EventArgs e)
-        {
-            display += "7";
-            UpdateDisplay();
-        }
-
-        private void Btn8_Click(object sender, EventArgs e)
-        {
-            display += "8";
-            UpdateDisplay();
-        }
-
-        private void Btn9_Click(object sender, EventArgs e)
-        {
-            display += "9";
-            UpdateDisplay();
-        }
-
-        private void BtnDot_Click(object sender, EventArgs e)
-        {
-            display += ".";
-            UpdateDisplay();
-        }
-
-        private void BtnLBracket_Click(object sender, EventArgs e)
-        {
-            display += "(";
-            UpdateDisplay();
-        }
-
-        private void BtnRBracket_Click(object sender, EventArgs e)
-        {
-            display += ")";
-            display = ValidRightBrackets(display);
-            UpdateDisplay();
-        }
-
-        private void BtnPlus_Click(object sender, EventArgs e)
-        {
-            display += "+";
-            UpdateDisplay();
-        }
-
-        private void BtnMinus_Click(object sender, EventArgs e)
-        {
-            display += "-";
-            UpdateDisplay();
-        }
-
-        private void BtnTimes_Click(object sender, EventArgs e)
-        {
-            display += "*";
-            UpdateDisplay();
-        }
-
-        private void BtnDivide_Click(object sender, EventArgs e)
-        {
-            display += "/";
-            UpdateDisplay();
-        }
-
-        private void BtnExp_Click(object sender, EventArgs e)
-        {
-            display += "^";
-            UpdateDisplay();
-        }
-
-    }
-    //字符串和IndexOfAny对应方法
-    public static class StringExtend
-    {
-        public static int IndexNotOfAny(this string str, char[] anyOf, int startIndex)
-        {
-            for (int a = startIndex; a < str.Length; ++a)
-            {
-                char b = str[a];
-                bool c = true;
-                foreach (char d in anyOf)
-                {
-                    if (b == d)
-                    {
-                        c = false;
-                        break;
-                    }
-                }
-                if (c)
-                {
-                    return a;
-                }
-            }
-            return -1;
-        }
+        Sshu(ref expression, ref c, 0, expression.Length);
+        return c[0];
     }
 }

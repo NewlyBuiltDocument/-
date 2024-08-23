@@ -528,7 +528,8 @@ public static class AnyCalculate
         {
             f = a.Count(0, e);
             if (a[e] == '*') b[f - 1] *= b[f];
-            else b[f - 1] /= b[f];
+            else if (b[f] != 0) b[f - 1] /= b[f];
+            else throw new DivideByZeroException();
         }
         for (int e = a.IndexOfAny(de, c), f; e != -1 && e < d; a = a.Remove(e, 2), d -= 2, b.RemoveAt(f), e = a.IndexOfAny(de, e))
         {

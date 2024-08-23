@@ -296,7 +296,11 @@ public partial class CalForm : Form
                 AddToHistory(display);
                 display = "";//清空显示字符串，等待下一次输入
             }
-            catch
+            catch(DivideByZeroException)
+            {
+                MessageBox.Show("除数不能为0！");
+            }
+            catch 
             {
                 MessageBox.Show("输入有误！");
             }

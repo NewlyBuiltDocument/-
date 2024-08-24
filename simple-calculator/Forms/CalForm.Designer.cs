@@ -1,5 +1,4 @@
-﻿
-namespace simple_calculator;
+﻿namespace simple_calculator;
 
 partial class CalForm
 {
@@ -19,6 +18,33 @@ partial class CalForm
             components.Dispose();
         }
         base.Dispose(disposing);
+    }
+
+    /// <summary>
+    /// Method to initialize the button type
+    /// </summary>
+    private void InitializeButtonType()
+    {
+        numberButton = new NumberButton(this);
+        symbolButton = new SymbolButton(this);
+        operatorButton = new OperatorButton(this);
+        dotButton = new DotButton(this);
+        leftBracketButton = new LeftBracketButton(this);
+        rightBracketButton = new RightBracketButton(this);
+        historyButton = new HistoryButton(this);
+        delButton = new DelButton(this);
+        clearButton = new ClearButton(this);
+        equalButton = new EqualButton(this);
+        numberButton.InputEvent += UpdateDisplay;
+        symbolButton.InputEvent += UpdateDisplay;
+        operatorButton.InputEvent += UpdateDisplay;
+        dotButton.InputEvent += UpdateDisplay;
+        leftBracketButton.InputEvent += UpdateDisplay;
+        rightBracketButton.InputEvent += UpdateDisplay;
+        delButton.InputEvent += UpdateDisplay;
+        clearButton.InputEvent += UpdateDisplay;
+        equalButton.InputEvent += UpdateDisplay;
+        equalButton.InputEvent += ResetExpression;
     }
 
     #region Windows Form Designer generated code
@@ -124,7 +150,7 @@ partial class CalForm
         BtnHistory.TabIndex = 34;
         BtnHistory.Text = "History";
         BtnHistory.UseVisualStyleBackColor = true;
-        BtnHistory.Click += BtnHistory_Click;
+        BtnHistory.Click += historyButton.ButtonClick;
         // 
         // BtnClear
         // 
@@ -136,7 +162,7 @@ partial class CalForm
         BtnClear.TabIndex = 33;
         BtnClear.Text = "Clear";
         BtnClear.UseVisualStyleBackColor = true;
-        BtnClear.Click += BtnClear_Click;
+        BtnClear.Click += clearButton.ButtonClick;
         // 
         // BtnExp
         // 
@@ -148,7 +174,7 @@ partial class CalForm
         BtnExp.TabIndex = 32;
         BtnExp.Text = "^";
         BtnExp.UseVisualStyleBackColor = true;
-        BtnExp.Click += BtnOp_Click;
+        BtnExp.Click += operatorButton.ButtonClick;
         // 
         // BtnRBracket
         // 
@@ -160,7 +186,7 @@ partial class CalForm
         BtnRBracket.TabIndex = 31;
         BtnRBracket.Text = ")";
         BtnRBracket.UseVisualStyleBackColor = true;
-        BtnRBracket.Click += BtnRBracket_Click;
+        BtnRBracket.Click += rightBracketButton.ButtonClick;
         // 
         // BtnLBracket
         // 
@@ -172,7 +198,7 @@ partial class CalForm
         BtnLBracket.TabIndex = 30;
         BtnLBracket.Text = "(";
         BtnLBracket.UseVisualStyleBackColor = true;
-        BtnLBracket.Click += BtnLBracket_Click;
+        BtnLBracket.Click += leftBracketButton.ButtonClick;
         // 
         // BtnTimes
         // 
@@ -184,7 +210,7 @@ partial class CalForm
         BtnTimes.TabIndex = 28;
         BtnTimes.Text = "×";
         BtnTimes.UseVisualStyleBackColor = true;
-        BtnTimes.Click += BtnOp_Click;
+        BtnTimes.Click += operatorButton.ButtonClick;
         // 
         // Btn9
         // 
@@ -196,7 +222,7 @@ partial class CalForm
         Btn9.TabIndex = 27;
         Btn9.Text = "9";
         Btn9.UseVisualStyleBackColor = true;
-        Btn9.Click += BtnNum_Click;
+        Btn9.Click += numberButton.ButtonClick;
         // 
         // Btn8
         // 
@@ -208,7 +234,7 @@ partial class CalForm
         Btn8.TabIndex = 26;
         Btn8.Text = "8";
         Btn8.UseVisualStyleBackColor = true;
-        Btn8.Click += BtnNum_Click;
+        Btn8.Click += numberButton.ButtonClick;
         // 
         // BtnMinus
         // 
@@ -220,7 +246,7 @@ partial class CalForm
         BtnMinus.TabIndex = 25;
         BtnMinus.Text = "-";
         BtnMinus.UseVisualStyleBackColor = true;
-        BtnMinus.Click += BtnOp_Click;
+        BtnMinus.Click += symbolButton.ButtonClick;
         // 
         // Btn6
         // 
@@ -232,7 +258,7 @@ partial class CalForm
         Btn6.TabIndex = 24;
         Btn6.Text = "6";
         Btn6.UseVisualStyleBackColor = true;
-        Btn6.Click += BtnNum_Click;
+        Btn6.Click += numberButton.ButtonClick;
         // 
         // Btn5
         // 
@@ -244,7 +270,7 @@ partial class CalForm
         Btn5.TabIndex = 23;
         Btn5.Text = "5";
         Btn5.UseVisualStyleBackColor = true;
-        Btn5.Click += BtnNum_Click;
+        Btn5.Click += numberButton.ButtonClick;
         // 
         // BtnPlus
         // 
@@ -256,7 +282,7 @@ partial class CalForm
         BtnPlus.TabIndex = 22;
         BtnPlus.Text = "+";
         BtnPlus.UseVisualStyleBackColor = true;
-        BtnPlus.Click += BtnOp_Click;
+        BtnPlus.Click += symbolButton.ButtonClick;
         // 
         // Btn3
         // 
@@ -268,7 +294,7 @@ partial class CalForm
         Btn3.TabIndex = 21;
         Btn3.Text = "3";
         Btn3.UseVisualStyleBackColor = true;
-        Btn3.Click += BtnNum_Click;
+        Btn3.Click += numberButton.ButtonClick;
         // 
         // Btn2
         // 
@@ -280,7 +306,7 @@ partial class CalForm
         Btn2.TabIndex = 20;
         Btn2.Text = "2";
         Btn2.UseVisualStyleBackColor = true;
-        Btn2.Click += BtnNum_Click;
+        Btn2.Click += numberButton.ButtonClick;
         // 
         // BtnEqual
         // 
@@ -292,7 +318,7 @@ partial class CalForm
         BtnEqual.TabIndex = 19;
         BtnEqual.Text = "=";
         BtnEqual.UseVisualStyleBackColor = true;
-        BtnEqual.Click += BtnEqual_Click;
+        BtnEqual.Click += equalButton.ButtonClick;
         // 
         // BtnDel
         // 
@@ -304,7 +330,7 @@ partial class CalForm
         BtnDel.TabIndex = 18;
         BtnDel.Text = "DEL";
         BtnDel.UseVisualStyleBackColor = true;
-        BtnDel.Click += BtnDel_Click;
+        BtnDel.Click += delButton.ButtonClick;
         // 
         // Btn0
         // 
@@ -316,7 +342,7 @@ partial class CalForm
         Btn0.TabIndex = 17;
         Btn0.Text = "0";
         Btn0.UseVisualStyleBackColor = true;
-        Btn0.Click += BtnNum_Click;
+        Btn0.Click += numberButton.ButtonClick;
         // 
         // BtnDot
         // 
@@ -328,7 +354,7 @@ partial class CalForm
         BtnDot.TabIndex = 16;
         BtnDot.Text = ".";
         BtnDot.UseVisualStyleBackColor = true;
-        BtnDot.Click += BtnDot_Click;
+        BtnDot.Click += dotButton.ButtonClick;
         // 
         // Btn1
         // 
@@ -340,7 +366,7 @@ partial class CalForm
         Btn1.TabIndex = 12;
         Btn1.Text = "1";
         Btn1.UseVisualStyleBackColor = true;
-        Btn1.Click += BtnNum_Click;
+        Btn1.Click += numberButton.ButtonClick;
         // 
         // Btn4
         // 
@@ -352,7 +378,7 @@ partial class CalForm
         Btn4.TabIndex = 8;
         Btn4.Text = "4";
         Btn4.UseVisualStyleBackColor = true;
-        Btn4.Click += BtnNum_Click;
+        Btn4.Click += numberButton.ButtonClick;
         // 
         // Btn7
         // 
@@ -364,7 +390,7 @@ partial class CalForm
         Btn7.TabIndex = 4;
         Btn7.Text = "7";
         Btn7.UseVisualStyleBackColor = true;
-        Btn7.Click += BtnNum_Click;
+        Btn7.Click += numberButton.ButtonClick;
         // 
         // BtnDivide
         // 
@@ -376,7 +402,7 @@ partial class CalForm
         BtnDivide.TabIndex = 3;
         BtnDivide.Text = "÷";
         BtnDivide.UseVisualStyleBackColor = true;
-        BtnDivide.Click += BtnOp_Click;
+        BtnDivide.Click += operatorButton.ButtonClick;
         // 
         // CalForm
         // 
@@ -423,4 +449,14 @@ partial class CalForm
     private Button BtnHistory;
     private Button BtnClear;
     private Button BtnExp;
+    private NumberButton numberButton;
+    private SymbolButton symbolButton;
+    private OperatorButton operatorButton;
+    private DotButton dotButton;
+    private LeftBracketButton leftBracketButton;
+    private RightBracketButton rightBracketButton;
+    private HistoryButton historyButton;
+    private DelButton delButton;
+    private ClearButton clearButton;
+    private EqualButton equalButton;
 }

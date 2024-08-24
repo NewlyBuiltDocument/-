@@ -60,6 +60,7 @@ public class CalFormTests
             Assert.Fail();
         }
         catch {; }
+        Assert.ThrowsException<DivideByZeroException>(() => AnyCalculate.Calculate("3.5/0"));
     }
 
     [TestMethod()]
@@ -138,6 +139,18 @@ public class CalFormTests
     public void ValidSymbolsTest(string expression, string op, string expected)
     {
         string result = CalForm.ValidSymbols(expression, op);
+        Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod()]
+    [Timeout(2000)]
+    [DataRow("", "3", "3")]
+    [DataRow("1+2", "3", "1+23")]
+    [DataRow("1*23.", "5", "1*23.5")]
+    [DataRow("(1+2.3)", "4", "(1+2.3)*4")]
+    public void ValidNumbersTest(string expression, string number, string expected)
+    {
+        string result = CalForm.ValidNumbers(expression, number);
         Assert.AreEqual(expected, result);
     }
 }

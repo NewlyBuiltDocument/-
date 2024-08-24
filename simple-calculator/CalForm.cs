@@ -218,6 +218,28 @@ public partial class CalForm : Form
     }
 
     /// <summary>
+    /// 在右括号和数字之间插入乘号
+    /// </summary>
+    /// <param name="expression">输入数字前的表达式</param>
+    /// <param name="number">要输入的数字</param>
+    /// <returns>输入数字后的表达式</returns>
+    public static string ValidNumbers(string expression, string number)
+    {
+        if (expression.Length == 0)
+        {
+            return number;
+        }
+        else if (expression[^1] == ')')
+        {
+            return expression + "*" + number;
+        }
+        else
+        {
+            return expression + number;
+        }
+    }
+
+    /// <summary>
     /// 按下数字键时执行的操作
     /// </summary>
     /// <param name="sender"></param>
@@ -227,7 +249,7 @@ public partial class CalForm : Form
         if (sender is Button clickedButton)
         {
             string buttonText = clickedButton.Text;
-            display += buttonText;
+            display = ValidNumbers(display, buttonText);
             UpdateDisplay();
         }
     }

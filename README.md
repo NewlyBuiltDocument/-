@@ -39,6 +39,11 @@
 
 ---
 
+## Prerequisites
+[.NET 8.0](https://dotnet.microsoft.com/download)
+
+---
+
 ## Screenshot
  | Calculator Form                          |History Form                         |
  | :--------------------------------------: | :---------------------------------: |

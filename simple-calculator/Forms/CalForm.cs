@@ -90,4 +90,22 @@ public partial class CalForm : Form
     {
         display = "";
     }
+
+    private void InputCharater(object sender, EventArgs e)
+    {
+        Button button = (Button)sender;
+        string character = button.Text;
+        switch (character)
+        {
+            case "×":
+                character = "*";
+                break;
+            case "÷":
+                character = "/";
+                break;
+            default:
+                break;
+        }
+        calculator.GetInput(character);
+    }
 }

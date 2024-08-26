@@ -6,11 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace simple_calculatorTests.ButtonTypes
+namespace simple_calculatorTests.Inputs
 {
     [TestClass()]
-    public class RightBracketButtonTests
+    public class RightBracketInputsTests
     {
+        private string result = "";
+
+        private void GetOutput(object? sender, OutputEventArgs e)
+        {
+            result = e.OutputExpression;
+        }
+
         [TestMethod()]
         [Timeout(2000)]
         [DataRow("3.5+(2", "3.5+(2)")]
@@ -25,13 +32,13 @@ namespace simple_calculatorTests.ButtonTypes
         [DataRow("(3.5^", "(3.5^")]
         public void GeneratedNewExpressionTest(string expression, string expected)
         {
-            CalForm calForm = new()
+            Calculator calculator = new()
             {
-                display = expression
+                expression = expression
             };
-            RightBracketButton rightBracketButton = new(calForm);
-            rightBracketButton.GeneratedNewExpression(")");
-            string result = calForm.display;
+            calculator.OutputEvent += GetOutput;
+            calculator.GetCharacter(")");
+
             Assert.AreEqual(expected, result);
         }
     }

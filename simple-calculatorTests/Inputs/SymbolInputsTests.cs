@@ -6,11 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace simple_calculatorTests.ButtonTypes
+namespace simple_calculatorTests.Inputs
 {
     [TestClass()]
-    public class SymbolButtonTests
+    public class SymbolInputsTests
     {
+        private string result = "";
+
+        private void GetOutput(object? sender, OutputEventArgs e)
+        {
+            result = e.OutputExpression;
+        }
+
         [TestMethod()]
         [Timeout(2000)]
         [DataRow("1+2", "+", "1+2+")]
@@ -21,15 +28,15 @@ namespace simple_calculatorTests.ButtonTypes
         [DataRow("1-", "-", "1-")]
         [DataRow("2*", "+", "2*(+")]
         [DataRow("3^", "-", "3^(-")]
-        public void GeneratedNewExpressionTest(string expression, string op, string expected)
+        public void GeneratedNewExpressionTest(string expression, string symbol, string expected)
         {
-            CalForm calForm = new()
+            Calculator calculator = new()
             {
-                display = expression
+                expression = expression
             };
-            SymbolButton symbolButton = new(calForm);
-            symbolButton.GeneratedNewExpression(op);
-            string result = calForm.display;
+            calculator.OutputEvent += GetOutput;
+            calculator.GetCharacter(symbol);
+
             Assert.AreEqual(expected, result);
         }
     }

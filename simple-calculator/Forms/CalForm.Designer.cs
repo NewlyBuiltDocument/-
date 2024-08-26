@@ -23,29 +23,10 @@ partial class CalForm
     /// <summary>
     /// Method to initialize the button type
     /// </summary>
-    private void InitializeButtonType()
+    private void InitializeCalculator()
     {
         calculator = new Calculator();
-        numberButton = new NumberButton(this);
-        symbolButton = new SymbolButton(this);
-        operatorButton = new OperatorButton(this);
-        dotButton = new DotButton(this);
-        leftBracketButton = new LeftBracketButton(this);
-        rightBracketButton = new RightBracketButton(this);
-        historyButton = new HistoryButton(this);
-        delButton = new DelButton(this);
-        clearButton = new ClearButton(this);
-        equalButton = new EqualButton(this);
-        numberButton.InputEvent += UpdateDisplay;
-        symbolButton.InputEvent += UpdateDisplay;
-        operatorButton.InputEvent += UpdateDisplay;
-        dotButton.InputEvent += UpdateDisplay;
-        leftBracketButton.InputEvent += UpdateDisplay;
-        rightBracketButton.InputEvent += UpdateDisplay;
-        delButton.InputEvent += UpdateDisplay;
-        clearButton.InputEvent += UpdateDisplay;
-        equalButton.InputEvent += UpdateDisplay;
-        equalButton.InputEvent += ResetExpression;
+        calculator.OutputEvent += UpdateDisplay;
     }
 
     #region Windows Form Designer generated code
@@ -151,7 +132,7 @@ partial class CalForm
         BtnHistory.TabIndex = 34;
         BtnHistory.Text = "History";
         BtnHistory.UseVisualStyleBackColor = true;
-        BtnHistory.Click += historyButton.ButtonClick;
+        BtnHistory.Click += InputFunction;
         // 
         // BtnClear
         // 
@@ -163,7 +144,7 @@ partial class CalForm
         BtnClear.TabIndex = 33;
         BtnClear.Text = "Clear";
         BtnClear.UseVisualStyleBackColor = true;
-        BtnClear.Click += clearButton.ButtonClick;
+        BtnClear.Click += InputCharater;
         // 
         // BtnExp
         // 
@@ -319,7 +300,7 @@ partial class CalForm
         BtnEqual.TabIndex = 19;
         BtnEqual.Text = "=";
         BtnEqual.UseVisualStyleBackColor = true;
-        BtnEqual.Click += equalButton.ButtonClick;
+        BtnEqual.Click += InputCharater;
         // 
         // BtnDel
         // 
@@ -331,7 +312,7 @@ partial class CalForm
         BtnDel.TabIndex = 18;
         BtnDel.Text = "DEL";
         BtnDel.UseVisualStyleBackColor = true;
-        BtnDel.Click += delButton.ButtonClick;
+        BtnDel.Click += InputCharater;
         // 
         // Btn0
         // 
@@ -450,16 +431,5 @@ partial class CalForm
     private Button BtnHistory;
     private Button BtnClear;
     private Button BtnExp;
-    private NumberButton numberButton;
-    private SymbolButton symbolButton;
-    private OperatorButton operatorButton;
-    private DotButton dotButton;
-    private LeftBracketButton leftBracketButton;
-    private RightBracketButton rightBracketButton;
-    private HistoryButton historyButton;
-    private DelButton delButton;
-    private ClearButton clearButton;
-    private EqualButton equalButton;
-
     private Calculator calculator;
 }

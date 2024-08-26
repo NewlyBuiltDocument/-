@@ -3,15 +3,21 @@ using simple_calculator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace simple_calculatorTests.ButtonTypes
+namespace simple_calculatorTests.Inputs
 {
     [TestClass()]
-    public class NumberButtonTests
+    public class NumberInputsTests
     {
+        private string result = "";
+
+        private void GetOutput(object? sender, OutputEventArgs e)
+        {
+            result = e.OutputExpression;
+        }
+
         [TestMethod()]
         [Timeout(2000)]
         [DataRow("", "3", "3")]
@@ -20,13 +26,13 @@ namespace simple_calculatorTests.ButtonTypes
         [DataRow("(1+2.3)", "4", "(1+2.3)*4")]
         public void GeneratedNewExpressionTest(string expression, string number, string expected)
         {
-            CalForm calForm = new()
+            Calculator calculator = new()
             {
-                display = expression
+                expression = expression
             };
-            NumberButton numberButton = new(calForm);
-            numberButton.GeneratedNewExpression(number);
-            string result = calForm.display;
+            calculator.OutputEvent += GetOutput;
+            calculator.GetCharacter(number);
+
             Assert.AreEqual(expected, result);
         }
     }

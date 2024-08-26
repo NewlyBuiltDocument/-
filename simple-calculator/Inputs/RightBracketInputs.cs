@@ -1,40 +1,34 @@
 using System.Text.RegularExpressions;
-using simple_calculator;
+
+namespace simple_calculator.Inputs;
 
 /// <summary>
-/// 右括号按钮类
+/// 右括号输入处理类
 /// </summary>
-/// <param name="calForm">计算器窗体</param>
-public class RightBracketButton(CalForm calForm) : BaseInputButton(calForm)
+/// <param name="calculator">计算器类</param>
+public class RightBracketInputs(Calculator calculator) : BaseInputType(calculator)
 {
-    
-    public event InputHandler? InputEvent;
-    
     /// <summary>
     /// 输入右括号时的处理方法
     /// </summary>
-    /// <param name="RightBracket">右括号</param>
-    public override void GeneratedNewExpression(string RightBracket)
+    /// <param name="rightBracket">右括号</param>
+    /// <returns>处理输入后的字符串</returns>
+    public override string GeneratedNewExpression(string rightBracket)
     {
-        string expression = calForm.display + ")";
+        string expression = calculator.expression + ")";
+        // 如果左括号数量小于右括号数量，删除右括号
         if (Regex.Count(expression, @"\(", RegexOptions.Compiled) < Regex.Count(expression, @"\)", RegexOptions.Compiled))
         {
             Match match2 = Regex.Match(expression, @"\)", RegexOptions.RightToLeft | RegexOptions.Compiled);
             expression = expression.Remove(match2.Index, 1);
-            InputEvent?.Invoke(expression);
+            return expression;
         }
-        //如果右括号前面是运算符或左括号，删除右括号
+        // 如果右括号前面是运算符或左括号，删除右括号
         if (Regex.Match(expression, @"[+\-\*/^(]\)", RegexOptions.Compiled).Success)
         {
             Match match2 = Regex.Match(expression, @"\)", RegexOptions.RightToLeft | RegexOptions.Compiled);
             expression = expression.Remove(match2.Index, 1);
         }
-        InputEvent?.Invoke(expression);
-    }
-    
-    public override void ButtonClick(object sender, EventArgs e)
-    {
-        Button button = (Button)sender;
-        GeneratedNewExpression(button.Text);
+        return expression;
     }
 }

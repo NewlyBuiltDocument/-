@@ -1,28 +1,30 @@
 using System.Data.SQLite;
-using simple_calculator;
 
-public class EqualButton(CalForm calForm) : BaseButtonTypes(calForm)
+namespace simple_calculator.Inputs;
+
+/// <summary>
+/// 等于输入处理类
+/// </summary>
+/// <param name="calculator">计算器类</param>
+public class EqualInputs(Calculator calculator) : BaseInputType(calculator)
 {
-    public event InputHandler? InputEvent;
-    
     /// <summary>
-    /// 计算结果
+    /// 输入等号时的计算方法
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    public override void ButtonClick(object sender, EventArgs e)
+    /// <param name="eq">等号</param>
+    /// <returns>包含计算结果的字符串</returns>
+    public override string GeneratedNewExpression(string eq)
     {
-        if (calForm.display.Length != 0)//如果为空：没有输入或已经得到结果，应当什么也不做
+        if (calculator.expression.Length != 0)
         {
             try
             {
-                string expression = calForm.display;
-                expression = CompleteRightBrackets();
+                string expression = CompleteRightBrackets();
                 string ans = Calculation.Calculate(expression).ToString();
                 expression += "=";
                 expression += ans;
                 AddToHistory(expression);
-                InputEvent?.Invoke(expression);
+                return expression;
             }
             catch(DivideByZeroException)
             {
@@ -33,6 +35,7 @@ public class EqualButton(CalForm calForm) : BaseButtonTypes(calForm)
                 MessageBox.Show("输入有误！");
             }
         }
+        return "";
     }
 
     /// <summary>
@@ -41,7 +44,7 @@ public class EqualButton(CalForm calForm) : BaseButtonTypes(calForm)
     /// <returns>补全后的字符串</returns>
     private string CompleteRightBrackets()
     {
-        string expression = calForm.display;
+        string expression = calculator.expression;
         int difference = expression.Count(x => x == '(') - expression.Count(x => x == ')');
         if (difference > 0)
         {

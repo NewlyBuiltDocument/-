@@ -107,8 +107,4 @@ public partial class CalForm : Form
         calculator.GetFunction(function);
     }
 
-    private void button4_Click(object sender, EventArgs e)
-    {
-
-    }
 }

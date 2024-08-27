@@ -53,13 +53,14 @@
             BtnX = new Button();
             listBox1 = new ListBox();
             panel1 = new Panel();
+            BtnEnter = new Button();
             SuspendLayout();
             // 
             // BtnClear
             // 
             BtnClear.Location = new Point(897, 362);
             BtnClear.Name = "BtnClear";
-            BtnClear.Size = new Size(75, 177);
+            BtnClear.Size = new Size(75, 116);
             BtnClear.TabIndex = 6;
             BtnClear.Text = "Clear";
             BtnClear.UseVisualStyleBackColor = true;
@@ -211,7 +212,7 @@
             // 
             // BtnY
             // 
-            BtnY.Location = new Point(897, 545);
+            BtnY.Location = new Point(897, 484);
             BtnY.Name = "BtnY";
             BtnY.Size = new Size(75, 55);
             BtnY.TabIndex = 21;
@@ -256,7 +257,7 @@
             // 
             // BtnX
             // 
-            BtnX.Location = new Point(897, 606);
+            BtnX.Location = new Point(897, 545);
             BtnX.Name = "BtnX";
             BtnX.Size = new Size(75, 55);
             BtnX.TabIndex = 26;
@@ -280,11 +281,23 @@
             panel1.Size = new Size(559, 642);
             panel1.TabIndex = 31;
             // 
+            // BtnEnter
+            // 
+            BtnEnter.BackColor = SystemColors.Control;
+            BtnEnter.Font = new Font("Microsoft YaHei UI", 20F);
+            BtnEnter.Location = new Point(898, 606);
+            BtnEnter.Name = "BtnEnter";
+            BtnEnter.Size = new Size(75, 55);
+            BtnEnter.TabIndex = 32;
+            BtnEnter.Text = "↵";
+            BtnEnter.UseVisualStyleBackColor = true;
+            // 
             // GraForm
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(984, 666);
+            Controls.Add(BtnEnter);
             Controls.Add(panel1);
             Controls.Add(BtnDot);
             Controls.Add(Btn0);
@@ -341,5 +354,6 @@
         private Button BtnX;
         private ListBox listBox1;
         private Panel panel1;
+        private Button BtnEnter;
     }
 }

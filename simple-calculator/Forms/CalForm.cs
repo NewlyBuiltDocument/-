@@ -10,17 +10,17 @@ public delegate void InputHandler(string expression);
 /// 窗体类，需为第一个类以便设计器渲染
 /// </summary>
 public partial class CalForm : Form
-{   
+{
     public CalForm()
     {
         InitializeCalculator();
         InitializeComponent();
-        
+
         x = Width;
         y = Height;
         SetTag(this);
     }
-    
+
 
     #region 控件大小随窗体大小等比例缩放
 
@@ -105,5 +105,10 @@ public partial class CalForm : Form
         Button button = (Button)sender;
         string function = button.Text;
         calculator.GetFunction(function);
+    }
+
+    private void button4_Click(object sender, EventArgs e)
+    {
+
     }
 }

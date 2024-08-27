@@ -22,7 +22,7 @@ public partial class HistoryForm : Form
         y = this.Height;
         setTag(this);
     }
-    //region 控件大小随窗体大小等比例缩放
+    #region 控件大小随窗体大小等比例缩放
     private float x;//定义当前窗体的宽度
     private float y;//定义当前窗体的高度
     private void setTag(Control cons)
@@ -66,7 +66,7 @@ public partial class HistoryForm : Form
         SetControls(newx, newy, this);
     }
 
-    //endregion
+    #endregion
 
     private void HistoryForm_Load(object sender, EventArgs e)
     {

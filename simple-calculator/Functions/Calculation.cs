@@ -1,4 +1,4 @@
-namespace simple_calculator;
+namespace simple_calculator.Functions;
 
 /// <summary>
 /// 计算方法类
@@ -108,7 +108,7 @@ public static class Calculation
                     subscript_other += charlist[subscript_other] == ' ' ? 2 : 1;
                 else subscript_other = startIndex;
                 numberlist[charlist.Count(0, subscript_find, ' ')] *=
-                    (charlist.Count(subscript_other, subscript_find - subscript_other + 1, '-') % 2 != 0 ? -1 : 1);
+                    charlist.Count(subscript_other, subscript_find - subscript_other + 1, '-') % 2 != 0 ? -1 : 1;
                 charlist.RemoveRange(subscript_other, subscript_find - subscript_other + 1);
                 count -= subscript_find - subscript_other + 1;
                 subscript_find = subscript_other + 1;
@@ -143,13 +143,13 @@ public static class Calculation
     {
         List<char> chars = [.. expression];
         List<double> listd = Separate(ref chars);
-        Action<int, int, int> erase = (int index_d, int index_c, int size_c) =>//使用lambda以捕获局部变量
+        Action<int, int, int> erase = (index_d, index_c, size_c) =>//使用lambda以捕获局部变量
         {
             listd[index_d] *= listd[index_d + 1];
             chars.RemoveRange(index_c, size_c);
             listd.RemoveAt(index_d + 1);
         };
-        int subscript_find, subscript_rfind = 0,charcount;
+        int subscript_find, subscript_rfind = 0, charcount;
         while ((subscript_find = chars.IndexOf(')', subscript_rfind), subscript_find != -1).Item2)  //有括号时对括号的处理
         {
             subscript_rfind = chars.LastIndexOf('(', subscript_find);

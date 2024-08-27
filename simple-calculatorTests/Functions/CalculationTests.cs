@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using simple_calculator;
+using simple_calculator.Functions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -62,6 +62,10 @@ partial class CalForm
         Btn4 = new Button();
         Btn7 = new Button();
         BtnDivide = new Button();
+        BtnI = new Button();
+        BtnTan = new Button();
+        BtnCos = new Button();
+        BtnSin = new Button();
         panel1.SuspendLayout();
         panel2.SuspendLayout();
         SuspendLayout();
@@ -72,9 +76,9 @@ partial class CalForm
         panel1.Controls.Add(DisplayText);
         panel1.Dock = DockStyle.Top;
         panel1.Location = new Point(0, 0);
-        panel1.Margin = new Padding(4, 4, 4, 4);
+        panel1.Margin = new Padding(2, 2, 2, 2);
         panel1.Name = "panel1";
-        panel1.Size = new Size(1056, 164);
+        panel1.Size = new Size(528, 90);
         panel1.TabIndex = 0;
         // 
         // DisplayText
@@ -82,10 +86,10 @@ partial class CalForm
         DisplayText.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         DisplayText.BackColor = SystemColors.Window;
         DisplayText.Font = new Font("Times New Roman", 42F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        DisplayText.Location = new Point(12, 13);
-        DisplayText.Margin = new Padding(4, 4, 4, 4);
+        DisplayText.Location = new Point(6, 7);
+        DisplayText.Margin = new Padding(2, 2, 2, 2);
         DisplayText.Name = "DisplayText";
-        DisplayText.Size = new Size(1032, 136);
+        DisplayText.Size = new Size(518, 72);
         DisplayText.TabIndex = 0;
         DisplayText.Text = "1+2=3";
         DisplayText.TextAlign = HorizontalAlignment.Right;
@@ -93,6 +97,10 @@ partial class CalForm
         // panel2
         // 
         panel2.BackColor = SystemColors.ButtonShadow;
+        panel2.Controls.Add(BtnI);
+        panel2.Controls.Add(BtnTan);
+        panel2.Controls.Add(BtnCos);
+        panel2.Controls.Add(BtnSin);
         panel2.Controls.Add(BtnHistory);
         panel2.Controls.Add(BtnClear);
         panel2.Controls.Add(BtnExp);
@@ -116,19 +124,19 @@ partial class CalForm
         panel2.Controls.Add(Btn7);
         panel2.Controls.Add(BtnDivide);
         panel2.Dock = DockStyle.Fill;
-        panel2.Location = new Point(0, 164);
-        panel2.Margin = new Padding(4, 4, 4, 4);
+        panel2.Location = new Point(0, 90);
+        panel2.Margin = new Padding(2, 2, 2, 2);
         panel2.Name = "panel2";
-        panel2.Size = new Size(1056, 823);
+        panel2.Size = new Size(528, 548);
         panel2.TabIndex = 1;
         // 
         // BtnHistory
         // 
         BtnHistory.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point, 134);
-        BtnHistory.Location = new Point(838, 356);
-        BtnHistory.Margin = new Padding(4, 4, 4, 4);
+        BtnHistory.Location = new Point(419, 280);
+        BtnHistory.Margin = new Padding(2, 2, 2, 2);
         BtnHistory.Name = "BtnHistory";
-        BtnHistory.Size = new Size(180, 425);
+        BtnHistory.Size = new Size(90, 233);
         BtnHistory.TabIndex = 34;
         BtnHistory.Text = "History";
         BtnHistory.UseVisualStyleBackColor = true;
@@ -137,10 +145,10 @@ partial class CalForm
         // BtnClear
         // 
         BtnClear.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point, 134);
-        BtnClear.Location = new Point(838, 46);
-        BtnClear.Margin = new Padding(4, 4, 4, 4);
+        BtnClear.Location = new Point(419, 25);
+        BtnClear.Margin = new Padding(2, 2, 2, 2);
         BtnClear.Name = "BtnClear";
-        BtnClear.Size = new Size(180, 270);
+        BtnClear.Size = new Size(90, 233);
         BtnClear.TabIndex = 33;
         BtnClear.Text = "Clear";
         BtnClear.UseVisualStyleBackColor = true;
@@ -149,10 +157,10 @@ partial class CalForm
         // BtnExp
         // 
         BtnExp.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        BtnExp.Location = new Point(440, 46);
-        BtnExp.Margin = new Padding(4, 4, 4, 4);
+        BtnExp.Location = new Point(320, 25);
+        BtnExp.Margin = new Padding(2, 2, 2, 2);
         BtnExp.Name = "BtnExp";
-        BtnExp.Size = new Size(160, 115);
+        BtnExp.Size = new Size(80, 63);
         BtnExp.TabIndex = 32;
         BtnExp.Text = "^";
         BtnExp.UseVisualStyleBackColor = true;
@@ -161,10 +169,10 @@ partial class CalForm
         // BtnRBracket
         // 
         BtnRBracket.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        BtnRBracket.Location = new Point(240, 46);
-        BtnRBracket.Margin = new Padding(4, 4, 4, 4);
+        BtnRBracket.Location = new Point(120, 110);
+        BtnRBracket.Margin = new Padding(2, 2, 2, 2);
         BtnRBracket.Name = "BtnRBracket";
-        BtnRBracket.Size = new Size(160, 115);
+        BtnRBracket.Size = new Size(80, 63);
         BtnRBracket.TabIndex = 31;
         BtnRBracket.Text = ")";
         BtnRBracket.UseVisualStyleBackColor = true;
@@ -173,10 +181,10 @@ partial class CalForm
         // BtnLBracket
         // 
         BtnLBracket.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        BtnLBracket.Location = new Point(40, 46);
-        BtnLBracket.Margin = new Padding(4, 4, 4, 4);
+        BtnLBracket.Location = new Point(20, 110);
+        BtnLBracket.Margin = new Padding(2, 2, 2, 2);
         BtnLBracket.Name = "BtnLBracket";
-        BtnLBracket.Size = new Size(160, 115);
+        BtnLBracket.Size = new Size(80, 63);
         BtnLBracket.TabIndex = 30;
         BtnLBracket.Text = "(";
         BtnLBracket.UseVisualStyleBackColor = true;
@@ -185,10 +193,10 @@ partial class CalForm
         // BtnTimes
         // 
         BtnTimes.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        BtnTimes.Location = new Point(640, 201);
-        BtnTimes.Margin = new Padding(4, 4, 4, 4);
+        BtnTimes.Location = new Point(320, 195);
+        BtnTimes.Margin = new Padding(2, 2, 2, 2);
         BtnTimes.Name = "BtnTimes";
-        BtnTimes.Size = new Size(160, 115);
+        BtnTimes.Size = new Size(80, 63);
         BtnTimes.TabIndex = 28;
         BtnTimes.Text = "×";
         BtnTimes.UseVisualStyleBackColor = true;
@@ -197,10 +205,10 @@ partial class CalForm
         // Btn9
         // 
         Btn9.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        Btn9.Location = new Point(440, 201);
-        Btn9.Margin = new Padding(4, 4, 4, 4);
+        Btn9.Location = new Point(220, 195);
+        Btn9.Margin = new Padding(2, 2, 2, 2);
         Btn9.Name = "Btn9";
-        Btn9.Size = new Size(160, 115);
+        Btn9.Size = new Size(80, 63);
         Btn9.TabIndex = 27;
         Btn9.Text = "9";
         Btn9.UseVisualStyleBackColor = true;
@@ -209,10 +217,10 @@ partial class CalForm
         // Btn8
         // 
         Btn8.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        Btn8.Location = new Point(240, 201);
-        Btn8.Margin = new Padding(4, 4, 4, 4);
+        Btn8.Location = new Point(120, 195);
+        Btn8.Margin = new Padding(2, 2, 2, 2);
         Btn8.Name = "Btn8";
-        Btn8.Size = new Size(160, 115);
+        Btn8.Size = new Size(80, 63);
         Btn8.TabIndex = 26;
         Btn8.Text = "8";
         Btn8.UseVisualStyleBackColor = true;
@@ -221,10 +229,10 @@ partial class CalForm
         // BtnMinus
         // 
         BtnMinus.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        BtnMinus.Location = new Point(640, 356);
-        BtnMinus.Margin = new Padding(4, 4, 4, 4);
+        BtnMinus.Location = new Point(320, 280);
+        BtnMinus.Margin = new Padding(2, 2, 2, 2);
         BtnMinus.Name = "BtnMinus";
-        BtnMinus.Size = new Size(160, 115);
+        BtnMinus.Size = new Size(80, 63);
         BtnMinus.TabIndex = 25;
         BtnMinus.Text = "-";
         BtnMinus.UseVisualStyleBackColor = true;
@@ -233,10 +241,10 @@ partial class CalForm
         // Btn6
         // 
         Btn6.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        Btn6.Location = new Point(440, 356);
-        Btn6.Margin = new Padding(4, 4, 4, 4);
+        Btn6.Location = new Point(220, 280);
+        Btn6.Margin = new Padding(2, 2, 2, 2);
         Btn6.Name = "Btn6";
-        Btn6.Size = new Size(160, 115);
+        Btn6.Size = new Size(80, 63);
         Btn6.TabIndex = 24;
         Btn6.Text = "6";
         Btn6.UseVisualStyleBackColor = true;
@@ -245,10 +253,10 @@ partial class CalForm
         // Btn5
         // 
         Btn5.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        Btn5.Location = new Point(240, 356);
-        Btn5.Margin = new Padding(4, 4, 4, 4);
+        Btn5.Location = new Point(120, 280);
+        Btn5.Margin = new Padding(2, 2, 2, 2);
         Btn5.Name = "Btn5";
-        Btn5.Size = new Size(160, 115);
+        Btn5.Size = new Size(80, 63);
         Btn5.TabIndex = 23;
         Btn5.Text = "5";
         Btn5.UseVisualStyleBackColor = true;
@@ -257,10 +265,10 @@ partial class CalForm
         // BtnPlus
         // 
         BtnPlus.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        BtnPlus.Location = new Point(640, 511);
-        BtnPlus.Margin = new Padding(4, 4, 4, 4);
+        BtnPlus.Location = new Point(320, 365);
+        BtnPlus.Margin = new Padding(2, 2, 2, 2);
         BtnPlus.Name = "BtnPlus";
-        BtnPlus.Size = new Size(160, 115);
+        BtnPlus.Size = new Size(80, 63);
         BtnPlus.TabIndex = 22;
         BtnPlus.Text = "+";
         BtnPlus.UseVisualStyleBackColor = true;
@@ -269,10 +277,10 @@ partial class CalForm
         // Btn3
         // 
         Btn3.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        Btn3.Location = new Point(440, 511);
-        Btn3.Margin = new Padding(4, 4, 4, 4);
+        Btn3.Location = new Point(220, 365);
+        Btn3.Margin = new Padding(2, 2, 2, 2);
         Btn3.Name = "Btn3";
-        Btn3.Size = new Size(160, 115);
+        Btn3.Size = new Size(80, 63);
         Btn3.TabIndex = 21;
         Btn3.Text = "3";
         Btn3.UseVisualStyleBackColor = true;
@@ -281,10 +289,10 @@ partial class CalForm
         // Btn2
         // 
         Btn2.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        Btn2.Location = new Point(240, 511);
-        Btn2.Margin = new Padding(4, 4, 4, 4);
+        Btn2.Location = new Point(120, 365);
+        Btn2.Margin = new Padding(2, 2, 2, 2);
         Btn2.Name = "Btn2";
-        Btn2.Size = new Size(160, 115);
+        Btn2.Size = new Size(80, 63);
         Btn2.TabIndex = 20;
         Btn2.Text = "2";
         Btn2.UseVisualStyleBackColor = true;
@@ -293,10 +301,10 @@ partial class CalForm
         // BtnEqual
         // 
         BtnEqual.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point, 134);
-        BtnEqual.Location = new Point(640, 666);
-        BtnEqual.Margin = new Padding(4, 4, 4, 4);
+        BtnEqual.Location = new Point(320, 450);
+        BtnEqual.Margin = new Padding(2, 2, 2, 2);
         BtnEqual.Name = "BtnEqual";
-        BtnEqual.Size = new Size(160, 115);
+        BtnEqual.Size = new Size(80, 63);
         BtnEqual.TabIndex = 19;
         BtnEqual.Text = "=";
         BtnEqual.UseVisualStyleBackColor = true;
@@ -305,10 +313,10 @@ partial class CalForm
         // BtnDel
         // 
         BtnDel.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        BtnDel.Location = new Point(440, 666);
-        BtnDel.Margin = new Padding(4, 4, 4, 4);
+        BtnDel.Location = new Point(220, 450);
+        BtnDel.Margin = new Padding(2, 2, 2, 2);
         BtnDel.Name = "BtnDel";
-        BtnDel.Size = new Size(160, 115);
+        BtnDel.Size = new Size(80, 63);
         BtnDel.TabIndex = 18;
         BtnDel.Text = "DEL";
         BtnDel.UseVisualStyleBackColor = true;
@@ -317,10 +325,10 @@ partial class CalForm
         // Btn0
         // 
         Btn0.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        Btn0.Location = new Point(240, 666);
-        Btn0.Margin = new Padding(4, 4, 4, 4);
+        Btn0.Location = new Point(120, 450);
+        Btn0.Margin = new Padding(2, 2, 2, 2);
         Btn0.Name = "Btn0";
-        Btn0.Size = new Size(160, 115);
+        Btn0.Size = new Size(80, 63);
         Btn0.TabIndex = 17;
         Btn0.Text = "0";
         Btn0.UseVisualStyleBackColor = true;
@@ -329,10 +337,10 @@ partial class CalForm
         // BtnDot
         // 
         BtnDot.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        BtnDot.Location = new Point(40, 666);
-        BtnDot.Margin = new Padding(4, 4, 4, 4);
+        BtnDot.Location = new Point(20, 450);
+        BtnDot.Margin = new Padding(2, 2, 2, 2);
         BtnDot.Name = "BtnDot";
-        BtnDot.Size = new Size(160, 115);
+        BtnDot.Size = new Size(80, 63);
         BtnDot.TabIndex = 16;
         BtnDot.Text = ".";
         BtnDot.UseVisualStyleBackColor = true;
@@ -341,10 +349,10 @@ partial class CalForm
         // Btn1
         // 
         Btn1.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        Btn1.Location = new Point(40, 511);
-        Btn1.Margin = new Padding(4, 4, 4, 4);
+        Btn1.Location = new Point(20, 365);
+        Btn1.Margin = new Padding(2, 2, 2, 2);
         Btn1.Name = "Btn1";
-        Btn1.Size = new Size(160, 115);
+        Btn1.Size = new Size(80, 63);
         Btn1.TabIndex = 12;
         Btn1.Text = "1";
         Btn1.UseVisualStyleBackColor = true;
@@ -353,10 +361,10 @@ partial class CalForm
         // Btn4
         // 
         Btn4.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        Btn4.Location = new Point(40, 356);
-        Btn4.Margin = new Padding(4, 4, 4, 4);
+        Btn4.Location = new Point(20, 280);
+        Btn4.Margin = new Padding(2, 2, 2, 2);
         Btn4.Name = "Btn4";
-        Btn4.Size = new Size(160, 115);
+        Btn4.Size = new Size(80, 63);
         Btn4.TabIndex = 8;
         Btn4.Text = "4";
         Btn4.UseVisualStyleBackColor = true;
@@ -365,10 +373,10 @@ partial class CalForm
         // Btn7
         // 
         Btn7.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
-        Btn7.Location = new Point(40, 201);
-        Btn7.Margin = new Padding(4, 4, 4, 4);
+        Btn7.Location = new Point(20, 195);
+        Btn7.Margin = new Padding(2, 2, 2, 2);
         Btn7.Name = "Btn7";
-        Btn7.Size = new Size(160, 115);
+        Btn7.Size = new Size(80, 63);
         Btn7.TabIndex = 4;
         Btn7.Text = "7";
         Btn7.UseVisualStyleBackColor = true;
@@ -377,23 +385,68 @@ partial class CalForm
         // BtnDivide
         // 
         BtnDivide.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point, 134);
-        BtnDivide.Location = new Point(640, 46);
-        BtnDivide.Margin = new Padding(4, 4, 4, 4);
+        BtnDivide.Location = new Point(320, 110);
+        BtnDivide.Margin = new Padding(2, 2, 2, 2);
         BtnDivide.Name = "BtnDivide";
-        BtnDivide.Size = new Size(160, 115);
+        BtnDivide.Size = new Size(80, 63);
         BtnDivide.TabIndex = 3;
         BtnDivide.Text = "÷";
         BtnDivide.UseVisualStyleBackColor = true;
         BtnDivide.Click += InputCharater;
         // 
+        // BtnI
+        // 
+        BtnI.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point, 134);
+        BtnI.Location = new Point(220, 110);
+        BtnI.Margin = new Padding(2);
+        BtnI.Name = "BtnI";
+        BtnI.Size = new Size(80, 63);
+        BtnI.TabIndex = 38;
+        BtnI.Text = "i";
+        BtnI.UseVisualStyleBackColor = true;
+        // 
+        // BtnTan
+        // 
+        BtnTan.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
+        BtnTan.Location = new Point(220, 25);
+        BtnTan.Margin = new Padding(2);
+        BtnTan.Name = "BtnTan";
+        BtnTan.Size = new Size(80, 63);
+        BtnTan.TabIndex = 37;
+        BtnTan.Text = "tan";
+        BtnTan.UseVisualStyleBackColor = true;
+        // 
+        // BtnCos
+        // 
+        BtnCos.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
+        BtnCos.Location = new Point(120, 25);
+        BtnCos.Margin = new Padding(2);
+        BtnCos.Name = "BtnCos";
+        BtnCos.Size = new Size(80, 63);
+        BtnCos.TabIndex = 36;
+        BtnCos.Text = "cos";
+        BtnCos.UseVisualStyleBackColor = true;
+        // 
+        // BtnSin
+        // 
+        BtnSin.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 134);
+        BtnSin.Location = new Point(20, 25);
+        BtnSin.Margin = new Padding(2);
+        BtnSin.Name = "BtnSin";
+        BtnSin.Size = new Size(80, 63);
+        BtnSin.TabIndex = 35;
+        BtnSin.Text = "sin";
+        BtnSin.UseVisualStyleBackColor = true;
+        BtnSin.Click += button4_Click;
+        // 
         // CalForm
         // 
-        AutoScaleDimensions = new SizeF(14F, 31F);
+        AutoScaleDimensions = new SizeF(7F, 17F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1056, 987);
+        ClientSize = new Size(528, 638);
         Controls.Add(panel2);
         Controls.Add(panel1);
-        Margin = new Padding(4, 4, 4, 4);
+        Margin = new Padding(2, 2, 2, 2);
         Name = "CalForm";
         Text = "Calculator";
         Load += CalForm_Load;
@@ -432,4 +485,8 @@ partial class CalForm
     private Button BtnClear;
     private Button BtnExp;
     private Calculator calculator;
+    private Button BtnI;
+    private Button BtnTan;
+    private Button BtnCos;
+    private Button BtnSin;
 }

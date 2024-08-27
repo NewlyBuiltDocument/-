@@ -1,3 +1,4 @@
+using simple_calculator.Functions;
 using System.Data.SQLite;
 
 namespace simple_calculator.Inputs;

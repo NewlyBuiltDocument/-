@@ -6,39 +6,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace simple_calculatorTests.Inputs
+namespace simple_calculatorTests.Inputs;
+
+[TestClass()]
+public class OperatorInputsTests
 {
-    [TestClass()]
-    public class OperatorInputsTests
+    private string result = "";
+
+    private void GetOutput(object? sender, OutputEventArgs e)
     {
-        private string result = "";
+        result = e.OutputExpression;
+    }
 
-        private void GetOutput(object? sender, OutputEventArgs e)
+    [TestMethod()]
+    [Timeout(2000)]
+    [DataRow("1+2", "1+2*")]
+    [DataRow("", "")]
+    [DataRow("1+", "1+")]
+    [DataRow("1+2+", "1+2+")]
+    [DataRow("1+2-", "1+2-")]
+    [DataRow("1+2*", "1+2*")]
+    [DataRow("1+2/", "1+2/")]
+    [DataRow("1+2^", "1+2^")]
+    [DataRow("1+2(", "1+2(")]
+    public void GeneratedNewExpressionTest(string expression, string expected)
+    {
+        Calculator calculator = new()
         {
-            result = e.OutputExpression;
-        }
+            expression = expression
+        };
+        calculator.OutputEvent += GetOutput;
+        calculator.GetCharacter("*");
 
-        [TestMethod()]
-        [Timeout(2000)]
-        [DataRow("1+2", "1+2*")]
-        [DataRow("", "")]
-        [DataRow("1+", "1+")]
-        [DataRow("1+2+", "1+2+")]
-        [DataRow("1+2-", "1+2-")]
-        [DataRow("1+2*", "1+2*")]
-        [DataRow("1+2/", "1+2/")]
-        [DataRow("1+2^", "1+2^")]
-        [DataRow("1+2(", "1+2(")]
-        public void GeneratedNewExpressionTest(string expression, string expected)
-        {
-            Calculator calculator = new()
-            {
-                expression = expression
-            };
-            calculator.OutputEvent += GetOutput;
-            calculator.GetCharacter("*");
-
-            Assert.AreEqual(expected, result);
-        }
+        Assert.AreEqual(expected, result);
     }
 }

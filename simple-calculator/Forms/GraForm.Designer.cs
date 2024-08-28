@@ -54,6 +54,8 @@
             listBox1 = new ListBox();
             panel1 = new Panel();
             BtnEnter = new Button();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // BtnClear
@@ -278,7 +280,7 @@
             panel1.BackColor = SystemColors.Window;
             panel1.Location = new Point(12, 12);
             panel1.Name = "panel1";
-            panel1.Size = new Size(559, 642);
+            panel1.Size = new Size(0, 0);
             panel1.TabIndex = 31;
             // 
             // BtnEnter
@@ -292,11 +294,21 @@
             BtnEnter.Text = "↵";
             BtnEnter.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = Properties.Resources.bg;
+            pictureBox1.Location = new Point(12, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(559, 642);
+            pictureBox1.TabIndex = 33;
+            pictureBox1.TabStop = false;
+            // 
             // GraForm
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(984, 666);
+            Controls.Add(pictureBox1);
             Controls.Add(BtnEnter);
             Controls.Add(panel1);
             Controls.Add(BtnDot);
@@ -325,6 +337,7 @@
             Controls.Add(listBox1);
             Name = "GraForm";
             Text = "Graphics";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -355,5 +368,6 @@
         private ListBox listBox1;
         private Panel panel1;
         private Button BtnEnter;
+        private PictureBox pictureBox1;
     }
 }

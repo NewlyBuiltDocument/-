@@ -50,6 +50,8 @@ public class Calculator
             "." => new DotInputs(this),
             "(" => new LeftBracketInputs(this),
             ")" => new RightBracketInputs(this),
+            "sin" or "cos" or "tan" => new TrigonometricInputs(this),
+            "i" => new ImaginaryInputs(this),
             _ => throw new ArgumentException("Invalid input")
         };
     }

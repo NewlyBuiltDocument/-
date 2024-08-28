@@ -20,7 +20,7 @@ public class OperatorInputs(Calculator calculator) : BaseInputType(calculator)
         {
             return calculator.expression;
         }
-        // 当上一个输入为符号或括号时，不允许输入
+        // 当上一个输入为符号或左括号时，不允许输入
         else if (Regex.Match(calculator.expression, @"[+\-\*/^(]$", RegexOptions.Compiled).Success)
         {
             return calculator.expression;

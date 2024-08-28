@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace simple_calculator.Inputs;
 
 /// <summary>
@@ -16,6 +18,10 @@ public class DelInputs(Calculator calculator) : BaseInputType(calculator)
         if (calculator.expression.Length == 0)
         {
             return calculator.expression;
+        }
+        else if (Regex.Match(calculator.expression, @"sin\($|cos\($|tan\($", RegexOptions.Compiled).Success)
+        {
+            return calculator.expression[..^4];
         }
         else
         {

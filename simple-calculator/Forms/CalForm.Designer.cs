@@ -142,6 +142,7 @@ partial class CalForm
         BtnGraphics.TabIndex = 39;
         BtnGraphics.Text = "Graphics";
         BtnGraphics.UseVisualStyleBackColor = true;
+        BtnGraphics.Click += InputFunction;
         // 
         // BtnI
         // 
@@ -153,6 +154,7 @@ partial class CalForm
         BtnI.TabIndex = 38;
         BtnI.Text = "i";
         BtnI.UseVisualStyleBackColor = true;
+        BtnI.Click += InputCharater;
         // 
         // BtnTan
         // 
@@ -164,6 +166,7 @@ partial class CalForm
         BtnTan.TabIndex = 37;
         BtnTan.Text = "tan";
         BtnTan.UseVisualStyleBackColor = true;
+        BtnTan.Click += InputCharater;
         // 
         // BtnCos
         // 
@@ -175,6 +178,7 @@ partial class CalForm
         BtnCos.TabIndex = 36;
         BtnCos.Text = "cos";
         BtnCos.UseVisualStyleBackColor = true;
+        BtnCos.Click += InputCharater;
         // 
         // BtnSin
         // 
@@ -186,6 +190,7 @@ partial class CalForm
         BtnSin.TabIndex = 35;
         BtnSin.Text = "sin";
         BtnSin.UseVisualStyleBackColor = true;
+        BtnSin.Click += InputCharater;
         // 
         // BtnHistory
         // 

@@ -17,8 +17,8 @@ public class NumberInputs(Calculator calculator) : BaseInputType(calculator)
         {
             return calculator.expression + number;
         }
-        // 在右括号后输入数字时，自动补全乘号
-        else if (calculator.expression[^1] == ')')
+        // 在右括号或i后输入数字时，自动补全乘号
+        else if (calculator.expression[^1] == ')' || calculator.expression[^1] == 'i')
         {
             return calculator.expression + "*" + number;
         }

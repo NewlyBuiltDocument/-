@@ -15,8 +15,12 @@ public class DotInputs(Calculator calculator) : BaseInputType(calculator)
     /// <returns>处理输入后的字符串</returns>
     public override string GeneratedNewExpression(string dot)
     {
-        // 如果上一个输入为小数点，不允许输入
-        if (calculator.expression[^1] == '.')
+        if (calculator.expression.Length == 0)
+        {
+            return "0.";
+        }
+        // 如果上一个输入为小数点或i，不允许输入
+        else if (calculator.expression[^1] == '.' || calculator.expression[^1] == 'i')
         {
             return calculator.expression;
         }

@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using simple_calculator;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace simple_calculatorTests.Inputs;
 
 [TestClass()]
-public class LeftBracketInputsTests
+public class TrigonometricInputsTests
 {
     private string result = "";
 
@@ -20,12 +20,12 @@ public class LeftBracketInputsTests
 
     [TestMethod()]
     [Timeout(2000)]
-    [DataRow("", "(")]
+    [DataRow("", "sin(")]
     [DataRow("13.", "13.")]
-    [DataRow("13.5", "13.5*(")]
-    [DataRow("13.5+", "13.5+(")]
-    [DataRow("sin(13.5+3)", "sin(13.5+3)*(")]
-    [DataRow("3+2*i", "3+2*i*(")]
+    [DataRow("13.5", "13.5*sin(")]
+    [DataRow("13.5+", "13.5+sin(")]
+    [DataRow("sin(13.5+3)", "sin(13.5+3)*sin(")]
+    [DataRow("3+2*i", "3+2*i*sin(")]
     public void GeneratedNewExpressionTest(string expression, string expected)
     {
         Calculator calculator = new()
@@ -33,7 +33,7 @@ public class LeftBracketInputsTests
             expression = expression
         };
         calculator.OutputEvent += GetOutput;
-        calculator.GetCharacter("(");
+        calculator.GetCharacter("sin");
 
         Assert.AreEqual(expected, result);
     }

@@ -24,6 +24,7 @@ public class NumberInputsTests
     [DataRow("1+2", "3", "1+23")]
     [DataRow("1*23.", "5", "1*23.5")]
     [DataRow("(1+2.3)", "4", "(1+2.3)*4")]
+    [DataRow("1+2.3*i", "5", "1+2.3*i*5")]
     public void GeneratedNewExpressionTest(string expression, string number, string expected)
     {
         Calculator calculator = new()

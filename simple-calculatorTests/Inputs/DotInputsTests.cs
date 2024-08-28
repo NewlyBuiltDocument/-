@@ -28,6 +28,8 @@ public class DotInputsTests
     [DataRow("1/", "1/0.")]
     [DataRow("1^", "1^0.")]
     [DataRow("1+341233.55433", "1+341233.55433")]
+    [DataRow("", "0.")]
+    [DataRow("1+3*i", "1+3*i")]
     public void GeneratedNewExpressionTest(string expression, string expected)
     {
         Calculator calculator = new()

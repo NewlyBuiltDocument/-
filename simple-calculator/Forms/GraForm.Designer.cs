@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GraForm));
             BtnClear = new Button();
             BtnDivide = new Button();
             BtnExp = new Button();
@@ -307,6 +308,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Window;
             ClientSize = new Size(984, 666);
             Controls.Add(pictureBox1);
             Controls.Add(BtnEnter);
@@ -335,6 +337,7 @@
             Controls.Add(BtnDivide);
             Controls.Add(BtnClear);
             Controls.Add(listBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "GraForm";
             Text = "Graphics";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

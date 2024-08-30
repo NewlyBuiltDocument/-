@@ -14,6 +14,10 @@ public class Calculator
     private BaseFunctionType? functionType = null;
     public event EventHandler<OutputEventArgs>? OutputEvent;
 
+    /// <summary>
+    /// 获取输入的类型，生成新的显示表达式，并触发输出事件
+    /// </summary>
+    /// <param name="input">新输入的字符</param>
     public void GetCharacter(string input)
     {
         inputType = GetInputType(input);
@@ -25,6 +29,10 @@ public class Calculator
         }
     }
 
+    /// <summary>
+    /// 获取功能类型，执行功能
+    /// </summary>
+    /// <param name="function">输入的功能名称</param>
     public void GetFunction(string function)
     {
         functionType = GetFunctionType(function);

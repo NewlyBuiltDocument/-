@@ -315,17 +315,17 @@ public static class Calculation
                     string trigstr = new([expression[subscript_rfind - 3], expression[subscript_rfind - 2], expression[subscript_rfind - 1]]);
                     if(trigstr == "sin")
                     {
-                        listd.Item2[charcount] = Complex.Sin(listd.Item2[charcount] * Math.PI / 180);
+                        listd.Item2[charcount] = Complex.Sin(listd.Item2[charcount]);
                         listd.Item1.Erase((subscript_rfind-3, subscript_find + 1));
                     }
                     else if (trigstr == "cos")
                     {
-                        listd.Item2[charcount] = Complex.Cos(listd.Item2[charcount] * Math.PI / 180);
+                        listd.Item2[charcount] = Complex.Cos(listd.Item2[charcount]);
                         listd.Item1.Erase((subscript_rfind - 3, subscript_find + 1));
                     }
                     else if (trigstr == "tan")
                     {
-                        listd.Item2[charcount] = Complex.Tan(listd.Item2[charcount] * Math.PI / 180);
+                        listd.Item2[charcount] = Complex.Tan(listd.Item2[charcount]);
                         listd.Item1.Erase((subscript_rfind - 3, subscript_find + 1));
                     }
                     else

@@ -1,5 +1,6 @@
 using simple_calculator.Functions;
 using System.Data.SQLite;
+using System.Numerics;
 
 namespace simple_calculator.Inputs;
 
@@ -21,9 +22,24 @@ public class EqualInputs(Calculator calculator) : BaseInputType(calculator)
             try
             {
                 string expression = CompleteRightBrackets();
-                string ans = Calculation.Calculate(expression).ToString();
+                Complex ans = Calculation.Calculate(expression);
                 expression += "=";
-                expression += ans;
+                if (ans.Imaginary == 0.0)
+                {
+                    expression += ans.Real.ToString();
+                }
+                else if (ans.Real == 0.0)
+                {
+                    expression = string.Concat(expression.AsSpan(), ans.Imaginary.ToString(), "i");
+                }
+                else if (ans.Imaginary > 0.0)
+                {
+                    expression = string.Concat(expression.AsSpan(), ans.Real.ToString(), string.Concat("+", ans.Imaginary.ToString(), "i"));
+                }
+                else
+                {
+                    expression = string.Concat(expression.AsSpan(), ans.Real.ToString(), ans.Imaginary.ToString() + "i");
+                }
                 AddToHistory(expression);
                 return expression;
             }

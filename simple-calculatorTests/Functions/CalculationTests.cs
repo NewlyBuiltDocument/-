@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Numerics;
 
 namespace simple_calculatorTests.Functions;
 
@@ -48,7 +49,13 @@ public class CalculationTests
         double expected = Math.Pow(baseNumber, exponent);
         Assert.AreEqual(expected, result);
     }
-
+    [TestMethod()]
+    [Timeout(2000)]
+    [DataRow("sin(i)")]
+    public void CalculateImaginaryTest(string input)
+    {
+        Assert.AreEqual(Calculation.Calculate(input), Complex.Sin(Complex.ImaginaryOne));
+    }
     [TestMethod()]
     [Timeout(2000)]
     public void InvalidInputTest()

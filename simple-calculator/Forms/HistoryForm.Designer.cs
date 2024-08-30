@@ -28,7 +28,8 @@ partial class HistoryForm
     /// </summary>
     private void InitializeComponent()
     {
-        DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HistoryForm));
         DgvHistory = new DataGridView();
         BtnDel = new Button();
         ((System.ComponentModel.ISupportInitialize)DgvHistory).BeginInit();
@@ -39,43 +40,49 @@ partial class HistoryForm
         DgvHistory.AllowUserToAddRows = false;
         DgvHistory.AllowUserToDeleteRows = false;
         DgvHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        DgvHistory.BackgroundColor = SystemColors.Window;
+        DgvHistory.BorderStyle = BorderStyle.None;
         DgvHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle1.BackColor = SystemColors.Window;
-        dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 134);
-        dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-        dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-        dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-        dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-        DgvHistory.DefaultCellStyle = dataGridViewCellStyle1;
+        dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle2.BackColor = SystemColors.Window;
+        dataGridViewCellStyle2.Font = new Font("Microsoft YaHei UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 134);
+        dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+        dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+        dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+        dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+        DgvHistory.DefaultCellStyle = dataGridViewCellStyle2;
         DgvHistory.Location = new Point(0, 0);
-        DgvHistory.Margin = new Padding(4);
+        DgvHistory.Margin = new Padding(2);
         DgvHistory.Name = "DgvHistory";
         DgvHistory.RowHeadersWidth = 82;
         DgvHistory.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        DgvHistory.Size = new Size(1300, 568);
+        DgvHistory.Size = new Size(650, 357);
         DgvHistory.TabIndex = 0;
         // 
         // BtnDel
         // 
+        BtnDel.BackgroundImage = (Image)resources.GetObject("BtnDel.BackgroundImage");
+        BtnDel.BackgroundImageLayout = ImageLayout.Stretch;
         BtnDel.Font = new Font("Microsoft YaHei UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point, 134);
-        BtnDel.Location = new Point(72, 596);
-        BtnDel.Margin = new Padding(4);
+        BtnDel.ForeColor = SystemColors.Window;
+        BtnDel.Location = new Point(587, 361);
+        BtnDel.Margin = new Padding(2);
         BtnDel.Name = "BtnDel";
-        BtnDel.Size = new Size(1172, 157);
+        BtnDel.Size = new Size(52, 60);
         BtnDel.TabIndex = 1;
-        BtnDel.Text = "删除";
-        BtnDel.UseVisualStyleBackColor = true;
+        BtnDel.UseVisualStyleBackColor = false;
         BtnDel.Click += BtnDel_Click;
         // 
         // HistoryForm
         // 
-        AutoScaleDimensions = new SizeF(14F, 31F);
+        AutoScaleDimensions = new SizeF(7F, 17F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1300, 788);
+        BackColor = SystemColors.Window;
+        ClientSize = new Size(650, 432);
         Controls.Add(BtnDel);
         Controls.Add(DgvHistory);
-        Margin = new Padding(4);
+        Icon = (Icon)resources.GetObject("$this.Icon");
+        Margin = new Padding(2);
         Name = "HistoryForm";
         Text = "History";
         Load += HistoryForm_Load;

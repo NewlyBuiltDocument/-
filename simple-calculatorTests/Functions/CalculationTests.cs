@@ -31,7 +31,7 @@ public class CalculationTests
     [DataRow("(-3)*(-5)", 15)]
     public void CalculateTest(string input, double expected)
     {
-        double result = Calculation.Calculate(input);
+        double result = Calculation.Calculate(input).Real;
         Assert.AreEqual(expected, result);
     }
 
@@ -44,7 +44,7 @@ public class CalculationTests
     [DataRow("3.2^2.5", 3.2, 2.5)]
     public void CalculatePowerTest(string input, double baseNumber, double exponent)
     {
-        double result = Calculation.Calculate(input);
+        double result = Calculation.Calculate(input).Real;
         double expected = Math.Pow(baseNumber, exponent);
         Assert.AreEqual(expected, result);
     }

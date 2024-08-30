@@ -27,11 +27,11 @@ public class EqualInputs(Calculator calculator) : BaseInputType(calculator)
                 AddToHistory(expression);
                 return expression;
             }
-            catch(DivideByZeroException)
+            catch (DivideByZeroException)
             {
                 MessageBox.Show("除数不能为0！");
             }
-            catch 
+            catch
             {
                 MessageBox.Show("输入有误！");
             }

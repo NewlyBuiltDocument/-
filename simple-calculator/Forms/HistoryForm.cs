@@ -44,7 +44,7 @@ public partial class HistoryForm : Form
             //获取控件的Tag属性值，并分割后存储字符串数组
             if (con.Tag != null)
             {
-                string[] mytag = con.Tag.ToString().Split(new char[] { ';' });
+                string[] mytag = con.Tag.ToString()!.Split([';']);
                 //根据窗体缩放的比例确定控件的值
                 con.Width = Convert.ToInt32(System.Convert.ToSingle(mytag[0]) * newx);//宽度
                 con.Height = Convert.ToInt32(System.Convert.ToSingle(mytag[1]) * newy);//高度

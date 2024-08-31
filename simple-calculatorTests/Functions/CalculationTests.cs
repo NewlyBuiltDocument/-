@@ -49,6 +49,7 @@ public class CalculationTests
         double expected = Math.Pow(baseNumber, exponent);
         Assert.AreEqual(expected, result);
     }
+
     [TestMethod()]
     [Timeout(2000)]
     [DataRow("sin(i)")]
@@ -56,6 +57,7 @@ public class CalculationTests
     {
         Assert.AreEqual(Calculation.Calculate(input), Complex.Sin(Complex.ImaginaryOne));
     }
+
     [TestMethod()]
     [Timeout(2000)]
     public void InvalidInputTest()
@@ -67,5 +69,19 @@ public class CalculationTests
         }
         catch {; }
         Assert.ThrowsException<DivideByZeroException>(() => Calculation.Calculate("3.5/0"));
+    }
+
+    [TestMethod()]
+    [Timeout(2000)]
+    [DataRow("3.5+2*4", "3.5+2*4")]
+    [DataRow("3.5+3^2+8", "3.5+Pow(3,2)+8")]
+    [DataRow("3.5+(2+x)^3", "3.5+Pow((2+x),3)")]
+    [DataRow("3.5+2^(3+x)", "3.5+Pow(2,(3+x))")]
+    [DataRow("3.5+(4+x)^(3-x)+x", "3.5+Pow((4+x),(3-x))+x")]
+    [DataRow("(3.5+2)+(4-3)^(-3+x)", "(3.5+2)+Pow((4-3),(-3+x))")]
+    public void ReplaceWithPowTest(string input, string expected)
+    {
+        string result = Calculation.ReplaceWithPow(input);
+        Assert.AreEqual(expected, result);
     }
 }

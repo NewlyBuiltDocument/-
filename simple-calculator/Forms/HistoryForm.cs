@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace simple_calculator;
+namespace simple_calculator.Forms;
 
 public partial class HistoryForm : Form
 {

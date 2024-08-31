@@ -9,4 +9,5 @@ public abstract class BaseFunctionType(Calculator calculator)
     public readonly Calculator calculator = calculator;
 
     public abstract void Function();
+    public abstract void Function(string args);
 }

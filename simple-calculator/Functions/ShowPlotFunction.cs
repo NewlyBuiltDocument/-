@@ -1,16 +1,16 @@
-using simple_calculator.Forms;
+﻿using simple_calculator.Forms;
 
 namespace simple_calculator.Functions;
 
-public class HistoryFunction(Calculator calculator) : BaseFunctionType(calculator)
+public class ShowPlotFunction(Calculator calculator) : BaseFunctionType(calculator)
 {
     /// <summary>
-    /// 显示历史记录
+    /// 显示画图窗口
     /// </summary>
     public override void Function()
     {
-        HistoryForm historyForm = new();
-        historyForm.ShowDialog();
+        GraForm graForm = new();
+        graForm.ShowDialog();
     }
 
     public override void Function(string args)

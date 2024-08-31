@@ -24,6 +24,7 @@ public class EqualInputs(Calculator calculator) : BaseInputType(calculator)
                 string expression = CompleteRightBrackets();
                 Complex ans = Calculation.Calculate(expression);
                 expression += "=";
+                // 格式化复数输出
                 if (ans.Imaginary == 0.0)
                 {
                     expression += ans.Real.ToString();

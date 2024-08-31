@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using System.Windows.Forms; // Add this line to import the System.Windows.Forms namespace
 
-namespace simple_calculator;
+namespace simple_calculator.Forms;
 
 public delegate void InputHandler(string expression);
 
@@ -45,7 +45,7 @@ public partial class CalForm : Form
             //获取控件的Tag属性值，并分割后存储字符串数组
             if (con.Tag != null)
             {
-                string[] mytag = con.Tag.ToString().Split([';']);
+                string[] mytag = con.Tag.ToString()!.Split([';']);
                 //根据窗体缩放的比例确定控件的值
                 con.Width = Convert.ToInt32(Convert.ToSingle(mytag[0]) * newx);//宽度
                 con.Height = Convert.ToInt32(Convert.ToSingle(mytag[1]) * newy);//高度
@@ -82,6 +82,11 @@ public partial class CalForm : Form
         DisplayText.Text = e.OutputExpression;
     }
 
+    /// <summary>
+    /// 输入字符到计算器中
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void InputCharater(object sender, EventArgs e)
     {
         Button button = (Button)sender;
@@ -100,6 +105,11 @@ public partial class CalForm : Form
         calculator.GetCharacter(character);
     }
 
+    /// <summary>
+    /// 输入功能到计算器中
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void InputFunction(object sender, EventArgs e)
     {
         Button button = (Button)sender;

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
+using NCalc;
 
 namespace simple_calculator.Functions;
 
@@ -361,5 +363,90 @@ public static class Calculation
         }
         Cal_nobracket(expression, ref listd.Item1, ref listd.Item2, 0, expression.Length);
         return listd.Item2[0];
+    }
+
+    /// <summary>
+    /// 解析函数字符串
+    /// </summary>
+    /// <param name="func">函数字符串</param>
+    /// <returns>函数类型</returns>
+    public static Func<double, double> ParseFunction(string func)
+    {
+        // 移除 "y=" 前缀
+        if (func.StartsWith("y="))
+        {
+            func = func[2..];
+        }
+
+        func = ReplaceWithPow(func);
+
+        return x =>
+        {
+            var expression = new Expression(func);
+            expression.Parameters["x"] = x;
+            return Convert.ToDouble(expression.Evaluate());
+        };
+    }
+    
+    /// <summary>
+    /// 将^替换为Pow()
+    /// </summary>
+    /// <param name="func">待替换的字符串</param>
+    /// <returns>替换后的字符串</returns>
+    public static string ReplaceWithPow(string func)
+    {
+        int index = func.IndexOf('^');
+        if (index == -1)
+        {
+        return func;
+        }
+        // 判断^左右两边的内容
+        string left;
+        if (func[index - 1] == ')')
+        {
+            int leftBracketIndex = index - 1;
+            int bracketCount = 1;
+            while (leftBracketIndex >= 0 && bracketCount != 0)
+            {
+                leftBracketIndex--;
+                if (func[leftBracketIndex] == ')')
+                {
+                    bracketCount++;
+                }
+                else if (func[leftBracketIndex] == '(')
+                {
+                    bracketCount--;
+                }
+            }
+            left = func[leftBracketIndex..index];
+        }
+        else
+        {
+            left = Regex.Match(func[..index], @"[0-9\.x]+$", RegexOptions.Compiled).Value;
+        }
+        string right;
+        if (func[index + 1] == '(')
+        {
+            int rightBracketIndex = index + 1;
+            int bracketCount = 1;
+            while (rightBracketIndex < func.Length && bracketCount != 0)
+            {
+                rightBracketIndex++;
+                if (func[rightBracketIndex] == '(')
+                {
+                    bracketCount++;
+                }
+                else if (func[rightBracketIndex] == ')')
+                {
+                    bracketCount--;
+                }
+            }
+            right = func[(index + 1)..rightBracketIndex];
+        }
+        else
+        {
+            right = Regex.Match(func[(index + 1)..], @"[0-9\.x]+?", RegexOptions.Compiled).Value;
+        }
+        return func[..(index - left.Length)] + "Pow(" + left + "," + right + ")" + func[(index + right.Length + 1)..];
     }
 }

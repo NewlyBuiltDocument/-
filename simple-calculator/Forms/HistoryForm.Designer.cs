@@ -1,4 +1,4 @@
-﻿namespace simple_calculator;
+﻿namespace simple_calculator.Forms;
 
 partial class HistoryForm
 {

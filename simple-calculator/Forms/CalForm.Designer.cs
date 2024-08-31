@@ -1,4 +1,4 @@
-﻿namespace simple_calculator;
+﻿namespace simple_calculator.Forms;
 
 partial class CalForm
 {
@@ -21,7 +21,7 @@ partial class CalForm
     }
 
     /// <summary>
-    /// Method to initialize the button type
+    /// Method to initialize calculator
     /// </summary>
     private void InitializeCalculator()
     {
@@ -416,7 +416,7 @@ partial class CalForm
         BtnGraphics.Name = "BtnGraphics";
         BtnGraphics.Size = new Size(90, 148);
         BtnGraphics.TabIndex = 39;
-        BtnGraphics.Text = "Graphics";
+        BtnGraphics.Text = "Plot";
         BtnGraphics.UseVisualStyleBackColor = true;
         BtnGraphics.Click += InputFunction;
         // 

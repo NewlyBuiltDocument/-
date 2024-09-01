@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "simple-calculator", "simple
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "simple-calculatorTests", "simple-calculatorTests\simple-calculatorTests.csproj", "{B2ECD9D0-4655-4DC3-B3C5-E24C5CE6A64B}"
 EndProject
-Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation", "Documentation\Documentation.shfbproj", "{34EC53E1-9B6D-4503-9753-CCF1F9A3592F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{B2ECD9D0-4655-4DC3-B3C5-E24C5CE6A64B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2ECD9D0-4655-4DC3-B3C5-E24C5CE6A64B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2ECD9D0-4655-4DC3-B3C5-E24C5CE6A64B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{34EC53E1-9B6D-4503-9753-CCF1F9A3592F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{34EC53E1-9B6D-4503-9753-CCF1F9A3592F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{34EC53E1-9B6D-4503-9753-CCF1F9A3592F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{34EC53E1-9B6D-4503-9753-CCF1F9A3592F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

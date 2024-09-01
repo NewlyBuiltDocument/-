@@ -15,6 +15,9 @@ using simple_calculator.Functions;
 
 namespace simple_calculator.Forms;
 
+/// <summary>
+/// 画图窗体类
+/// </summary>
 public partial class GraForm : Form
 {
     /// <summary>

@@ -437,6 +437,7 @@ namespace simple_calculator.Forms
             Name = "GraForm";
             Text = "Graphics";
             Load += GraForm_Load;
+            Resize += CalForm_Resize;
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
             ResumeLayout(false);

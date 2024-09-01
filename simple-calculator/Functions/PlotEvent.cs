@@ -1,13 +1,13 @@
-namespace simple_calculator.Functions;
+ï»¿namespace simple_calculator.Functions;
 
 /// <summary>
-/// »­Í¼¹¦ÄÜÀà
+/// ç”»å›¾åŠŸèƒ½ç±»
 /// </summary>
-/// <param name="plot">»­Í¼¼ÆËãÆ÷Àà</param>
+/// <param name="plot">ç”»å›¾è®¡ç®—å™¨ç±»</param>
 public class PlotEvent(Plot plot) : BaseFunctionType(plot)
 {
     /// <summary>
-    /// ´¥·¢»­Í¼ÊÂ¼ş
+    /// è§¦å‘ç”»å›¾äº‹ä»¶
     /// </summary>
     public override void Function()
     {

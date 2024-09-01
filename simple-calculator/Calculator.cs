@@ -9,6 +9,9 @@ namespace simple_calculator;
 /// </summary>
 public class Calculator
 {
+    /// <summary>
+    /// 计算器当前的表达式
+    /// </summary>
     public string expression = "";
     private BaseInputType? inputType = null;
     private BaseFunctionType? functionType = null;

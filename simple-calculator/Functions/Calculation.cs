@@ -369,7 +369,7 @@ public static class Calculation
     /// 解析函数字符串
     /// </summary>
     /// <param name="func">函数字符串</param>
-    /// <returns>函数类型</returns>
+    /// <returns>函数</returns>
     public static Func<double, double> ParseFunction(string func)
     {
         // 移除 "y=" 前缀

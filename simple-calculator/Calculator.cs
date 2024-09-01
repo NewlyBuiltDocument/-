@@ -12,6 +12,9 @@ public class Calculator
     public string expression = "";
     private BaseInputType? inputType = null;
     private BaseFunctionType? functionType = null;
+    /// <summary>
+    /// 输出字符串事件
+    /// </summary>
     public event EventHandler<OutputEventArgs>? OutputEvent;
 
     /// <summary>
@@ -96,5 +99,8 @@ public class Calculator
 /// <param name="expression">输出的字符串</param>
 public class OutputEventArgs(string expression) : EventArgs
 {
+    /// <summary>
+    /// 输出的字符串
+    /// </summary>
     public string OutputExpression { get; set; } = expression;
 }

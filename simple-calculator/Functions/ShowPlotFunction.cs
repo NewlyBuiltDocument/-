@@ -2,6 +2,10 @@
 
 namespace simple_calculator.Functions;
 
+/// <summary>
+/// 打开画图计算器功能类
+/// </summary>
+/// <param name="calculator">计算器类</param>
 public class ShowPlotFunction(Calculator calculator) : BaseFunctionType(calculator)
 {
     /// <summary>

@@ -17,6 +17,9 @@ namespace simple_calculator.Forms;
 
 public partial class GraForm : Form
 {
+    /// <summary>
+    /// 初始化画图计算器类及窗体组件
+    /// </summary>
     public GraForm()
     {
         InitializePlot();

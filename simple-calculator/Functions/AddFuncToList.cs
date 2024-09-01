@@ -1,5 +1,9 @@
 namespace simple_calculator.Functions;
 
+/// <summary>
+/// 添加函数到列表功能类
+/// </summary>
+/// <param name="plot">画图计算器类</param>
 public class AddFuncToList(Plot plot) : BaseFunctionType(plot)
 {
     /// <summary>

@@ -4,12 +4,24 @@ using simple_calculator.Inputs;
 
 namespace simple_calculator;
 
+/// <summary>
+/// 画图计算器类
+/// </summary>
 public class Plot : Calculator
 {
     private BaseInputType? inputType = null;
     private BaseFunctionType? functionType = null;
+    /// <summary>
+    /// 需要画图的函数列表
+    /// </summary>
     public List<string> functionList = [];
+    /// <summary>
+    /// 更新函数列表事件
+    /// </summary>
     public event EventHandler<FuncListEventArgs>? UpdateListEvent;
+    /// <summary>
+    /// 画图事件
+    /// </summary>
     public event EventHandler<FuncListEventArgs>? PlotEvent;
 
     /// <summary>
@@ -38,18 +50,30 @@ public class Plot : Calculator
         }
     }
 
+    /// <summary>
+    /// 获取功能类型，执行功能
+    /// </summary>
+    /// <param name="function">输入的功能名称</param>
+    /// <param name="args">需要传递的参数</param>
     public void GetFunction(string function, string args)
     {
         functionType = GetFunctionType(function);
         functionType.Function(args);
     }
 
+    /// <summary>
+    /// 更新函数列表
+    /// </summary>
+    /// <param name="funcList">修改后的函数列表</param>
     public void ModifyFuncList(List<string> funcList)
     {
         functionList = funcList;
         OnUpdateListEvent(new FuncListEventArgs(functionList));
     }
 
+    /// <summary>
+    /// 触发画图事件
+    /// </summary>
     public void SendPlotEvent()
     {
         OnPlotEvent(new FuncListEventArgs(functionList));
@@ -114,7 +138,14 @@ public class Plot : Calculator
     }
 }
 
+/// <summary>
+/// 函数列表事件参数
+/// </summary>
+/// <param name="funcList">函数列表字符串</param>
 public class FuncListEventArgs(List<string> funcList) : EventArgs
 {
+    /// <summary>
+    /// 函数列表字符串
+    /// </summary>
     public List<string> FuncList { get; set; } = funcList;
 }

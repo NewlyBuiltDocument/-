@@ -4,13 +4,14 @@ using System.Windows.Forms; // Add this line to import the System.Windows.Forms 
 
 namespace simple_calculator.Forms;
 
-public delegate void InputHandler(string expression);
-
 /// <summary>
-/// 窗体类，需为第一个类以便设计器渲染
+/// 主窗体类
 /// </summary>
 public partial class CalForm : Form
 {
+    /// <summary>
+    /// 初始化计算器类以及窗体组件
+    /// </summary>
     public CalForm()
     {
         InitializeCalculator();

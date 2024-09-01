@@ -11,10 +11,19 @@ using System.Windows.Forms;
 
 namespace simple_calculator.Forms;
 
+/// <summary>
+/// 历史记录窗体类
+/// </summary>
 public partial class HistoryForm : Form
 {
+    /// <summary>
+    /// 缓存数据的DataTable
+    /// </summary>
     public DataTable dataTable = new();
     
+    /// <summary>
+    /// 初始化组件
+    /// </summary>
     public HistoryForm()
     {
         InitializeComponent();
@@ -73,6 +82,9 @@ public partial class HistoryForm : Form
         UpdateHistory();
     }
 
+    /// <summary>
+    /// 从数据库更新历史记录
+    /// </summary>
     public void UpdateHistory()
     {
         using SQLiteConnection conn = new(Program.myConnectionString);

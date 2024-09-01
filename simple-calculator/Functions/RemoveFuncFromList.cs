@@ -1,5 +1,9 @@
 namespace simple_calculator.Functions;
 
+/// <summary>
+/// 移除列表函数功能类
+/// </summary>
+/// <param name="plot">画图计算器类</param>
 public class RemoveFuncFromList(Plot plot) : BaseFunctionType(plot)
 {
     public override void Function()

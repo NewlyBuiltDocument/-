@@ -2,6 +2,10 @@ using simple_calculator.Forms;
 
 namespace simple_calculator.Functions;
 
+/// <summary>
+/// 历史记录功能类
+/// </summary>
+/// <param name="calculator">计算器类</param>
 public class HistoryFunction(Calculator calculator) : BaseFunctionType(calculator)
 {
     /// <summary>

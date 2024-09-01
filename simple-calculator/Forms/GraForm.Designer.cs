@@ -278,6 +278,7 @@ namespace simple_calculator.Forms
             // 
             // BtnX
             // 
+            BtnX.Font = new Font("Times New Roman", 10.5F, FontStyle.Italic, GraphicsUnit.Point, 0);
             BtnX.Location = new Point(941, 693);
             BtnX.Name = "BtnX";
             BtnX.Size = new Size(75, 55);

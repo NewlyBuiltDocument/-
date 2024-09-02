@@ -27,19 +27,19 @@ public class EqualInputs(Calculator calculator) : BaseInputType(calculator)
                 // 格式化复数输出
                 if (ans.Imaginary == 0.0)
                 {
-                    expression += ans.Real.ToString();
+                    expression += ans.Real.ToString("G15");
                 }
                 else if (ans.Real == 0.0)
                 {
-                    expression = string.Concat(expression.AsSpan(), ans.Imaginary.ToString(), "i");
+                    expression = string.Concat(expression.AsSpan(), ans.Imaginary.ToString("G15"), "i");
                 }
                 else if (ans.Imaginary > 0.0)
                 {
-                    expression = string.Concat(expression.AsSpan(), ans.Real.ToString(), string.Concat("+", ans.Imaginary.ToString(), "i"));
+                    expression = string.Concat(expression.AsSpan(), ans.Real.ToString("G15"), string.Concat("+", ans.Imaginary.ToString("G15"), "i"));
                 }
                 else
                 {
-                    expression = string.Concat(expression.AsSpan(), ans.Real.ToString(), ans.Imaginary.ToString() + "i");
+                    expression = string.Concat(expression.AsSpan(), ans.Real.ToString("G15"), ans.Imaginary.ToString("G15") + "i");
                 }
                 AddToHistory(expression);
                 return expression;
